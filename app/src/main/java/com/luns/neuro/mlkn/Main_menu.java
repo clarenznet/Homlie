@@ -86,7 +86,7 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
                 if (isInternetPresent) {
                     FundiTypes ft = ftList.get(position);
                     strSelectedService=ft.getStrFtTitle();
-                    Toast.makeText(getApplicationContext(), ft.getStrFtTitle(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), ft.getStrFtTitle(), Toast.LENGTH_SHORT).show();
                     Intent in = new Intent(getApplicationContext(), ServiceCalculator.class);
                     in.putExtra("strServerResponseResultData",strServerResponseResultData);
                     in.putExtra("strSelectedService",strSelectedService);

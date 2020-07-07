@@ -110,7 +110,7 @@ public class ServiceCalculator extends AppCompatActivity {
                 view.setSelected(true);
 //                CardViewDataAdapter sm = new CardViewDataAdapter(serviceitemList);
 ////                sm.getFilter().filter(dG.getStrDemographic());
-               Toast.makeText(ServiceCalculator.this, dG.getStrDemographic(), Toast.LENGTH_SHORT).show();
+               //Toast.makeText(ServiceCalculator.this, dG.getStrDemographic(), Toast.LENGTH_SHORT).show();
                 checkOut();
                 showJSON(strServerResponseResultData,dG.getStrDemographic());
             }

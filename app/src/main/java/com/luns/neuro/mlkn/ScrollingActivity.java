@@ -106,7 +106,7 @@ public class ScrollingActivity extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             //toolbar.setTitle(R.string.app_name);
             toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
-            toolbar.setTitle("HOMLIE services");
+            toolbar.setTitle("HOMLIE service");
             toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.overflowdots));
 
            // setSupportActionBar(toolbar);
