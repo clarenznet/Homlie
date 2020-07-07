@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "844032974944",
+    "firebase_url": "https://malakane-5ba22.firebaseio.com",
+    "project_id": "malakane-5ba22",
+    "storage_bucket": "malakane-5ba22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844032974944:android:3bfd29fd19ca8d15",
+        "android_client_info": {
+          "package_name": "com.luns.neuro.malakane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844032974944-gcrc0fl18af8lb90dh26t313tk0838r0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5JslFLeNHiUBju-OYP8phQ8DsJFWC64c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844032974944-gcrc0fl18af8lb90dh26t313tk0838r0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844032974944:android:1f7b7bf59313b7fcf86305",
+        "android_client_info": {
+          "package_name": "com.luns.neuro.mlkn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844032974944-a4f09eca6f214f9m7dlo7in7rt3nk6hl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luns.neuro.mlkn",
+            "certificate_hash": "02627878b7b2e0f396bb3aa4d08308ea631dcbbd"
+          }
+        },
+        {
+          "client_id": "844032974944-gcrc0fl18af8lb90dh26t313tk0838r0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5JslFLeNHiUBju-OYP8phQ8DsJFWC64c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844032974944-gcrc0fl18af8lb90dh26t313tk0838r0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

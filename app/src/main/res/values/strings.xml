@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Homlie</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="action_geolocate">Pick Place</string>
+    <string name="default_info_title">Default Location</string>
+    <string name="default_info_snippet">No places found, because location permission is disabled.</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <string name="action_userpolicy">\n These terms and conditions outline the rules and regulations for the use of UrbanSenses Website, located at
+
+        By accessing this website we assume you accept these terms and conditions. Do not continue to use UrbanSense if you do not agree to take all of the terms and conditions stated on this page.
+
+        The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
+    </string>
+    <string name="error_network_timeout">Network Timeout</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Welcome to Malakane</string>
+    <string name="slide_1_desc">Welcome note</string>
+    <string name="slide_2_title">Mission</string>
+    <string name="slide_2_desc">To provide services through workamanship.</string>
+
+    <string name="slide_3_title">What Malakane does</string>
+    <string name="slide_3_desc">Clean business.</string>
+
+    <string name="slide_4_title">How to use</string>
+    <string name="slide_4_desc">.</string>
+    <string name="app_label"> Search Feature</string>
+    <string name="search_hint">Search Fruit</string>
+    <string name="search_view">Enter search</string>
+    <string name="select_time">Select from time picker</string>
+    <string name="not_text"> </string>
+    <string name="add_new_location">Add new location</string>
+    <string name="location_list">Locations</string>
+    <string name="need_location_permission_message">You need to enable location permissions first</string>
+    <string name="location_permissions_granted_message">Location Permissions Granted</string>
+    <string name="setting_enabled" translatable="false">EnabledSetting</string>
+    <string name="settings_label">Settings</string>
+    <string name="location_permissions">Location Permissions</string>
+    <string name="enable_geofences">Enable Geofences</string>
+    <string name="privacy">http://www.google.com/policies/privacy</string>
+    <string name="ringer_permissions">Ringer Permissions</string>
+    <string name="silent_mode_activated">Silent mode activated</string>
+    <string name="touch_to_relaunch">Touch to launch the app.</string>
+    <string name="back_to_normal">Back to normal</string>
+
+</resources>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:clickable="true"
+    android:backgroundTint="#FFFFFF"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:id="@+id/funditypes_layoutcard">
+
+    <TextView
+        android:id="@+id/tvFtId"
+        android:textColor="@color/blue"
+        android:textSize="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        />
+
+
+    <RelativeLayout
+        android:id="@+id/icon_front"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+    >
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/dpFtThumbnail"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+            android:id="@+id/tvFtIcon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:visibility="gone"
+        />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvFtTitle"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_toRightOf="@+id/icon_front"
+        />
+    <TextView
+        android:id="@+id/tvFtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvFtTitle"
+        android:layout_toRightOf="@id/icon_front"
+        android:textSize="14dp"
+        android:textColor="@color/black"
+        android:layout_margin="4dp"
+        android:maxLines="2"/>
+
+</RelativeLayout>

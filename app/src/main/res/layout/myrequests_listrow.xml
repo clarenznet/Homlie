@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:backgroundTint="@color/colorPrimaryDark"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:layout_margin="10dp"
+    android:id="@+id/myrequests_layoutcard"
+    >
+    <TextView
+        android:id="@+id/tvMyRequestsId"
+        android:textSize="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+            android:id="@+id/icon_front"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+    >
+
+        <ImageView
+                android:id="@+id/icon_thumbnail"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <TextView
+                android:id="@+id/tvMyRequestsIcon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvMyRequestsTitle"
+        android:textColor="@color/colorAccent"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:text="Welcome note"
+        android:layout_toRightOf="@+id/icon_front"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvMyRequestsBody"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMyRequestsTitle"
+        android:paddingTop="2dp"
+        android:text="Welcome to malakane service"
+        android:layout_toRightOf="@+id/icon_front"
+        android:textColor="@color/colorPrimary"
+        />
+
+
+    <TextView
+        android:id="@+id/tvMyRequestsTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvMyRequestsBody"
+        android:textColor="@color/black"
+        android:paddingTop="2dp"
+        android:layout_toRightOf="@+id/icon_front"
+    />
+    <TextView
+            android:id="@+id/tvMyRequestsStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMyRequestsBody"
+            android:textColor="@color/colorAccent"
+            android:paddingTop="2dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+        android:visibility="gone"
+
+    />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/next"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tvMyRequestsBody"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

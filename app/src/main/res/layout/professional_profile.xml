@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+              android:background="@color/white"
+              android:layout_centerVertical="true"
+              android:orientation="vertical"
+    >
+    <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+    >
+    <LinearLayout
+        android:id="@+id/llyt0"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+
+    >
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progressBarPP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+        <LinearLayout
+                android:id="@+id/llyt1"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+        >
+         <TextView android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="personal info:"
+                   android:layout_margin="5dp"
+         />
+            <ImageView
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="140dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imgVProfilePhoto"
+                    android:src="@drawable/placer"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+        >
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:layout_height="wrap_content"
+                    android:hint="full name"
+                    android:id="@+id/edtFullName"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_height="wrap_content"
+                        android:hint="national id number/passport no"
+                        android:id="@+id/edtIdNo"
+                />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Next of kin contact"
+                        android:id="@+id/edtNextOfKinConctact"
+                />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/llyt2"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+        >
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="location info:"
+                      android:layout_margin="5dp"
+            />
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <AutoCompleteTextView
+                        android:layout_marginTop="2dp"
+                        android:hint="nationality"
+                        android:id="@+id/edtNationality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <AutoCompleteTextView
+                        android:layout_marginTop="2dp"
+                        android:hint="county of residence"
+                        android:id="@+id/edtCounty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <AutoCompleteTextView
+                        android:layout_marginTop="2dp"
+                        android:hint="physical address location"
+                        android:id="@+id/edtPhysicalAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+        <LinearLayout
+                android:id="@+id/llyt3"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+        >
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="professional info:"
+                      android:layout_margin="5dp"
+            />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+        >
+                <AutoCompleteTextView
+                        android:layout_marginTop="2dp"
+                        android:hint="main profession"
+                        android:id="@+id/edtProfessionalTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <AutoCompleteTextView
+                        android:layout_marginTop="2dp"
+                        android:hint="second profession"
+                        android:id="@+id/edtSecondProfessionalTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:inputType="text"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+            >
+                <AutoCompleteTextView
+                        android:layout_marginTop="2dp"
+                        android:hint="third profession"
+                        android:id="@+id/edtThirdProfessionalTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+        >
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:layout_height="wrap_content"
+                    android:hint="describe your specialization"
+                    android:id="@+id/edtSpecialization"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:inputType="text"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+        >
+            <AutoCompleteTextView
+                    android:layout_marginTop="2dp"
+                    android:hint="Highest Education Level"
+                    android:id="@+id/edtHighestEducationLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""/>
+        </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+            <LinearLayout
+                    android:id="@+id/layoutDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dots_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dots_margin_bottom"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_above="@+id/btn_next"
+            > </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:alpha=".5"
+                    android:layout_above="@id/layoutDots"
+                    android:background="@color/media" />
+
+            <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@null"
+                    android:text="@string/next"
+                    android:textColor="@color/colorPrimary" />
+
+            <Button
+                    android:id="@+id/btn_skip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@null"
+                    android:text="@string/skip"
+                    android:visibility="invisible"
+                    android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

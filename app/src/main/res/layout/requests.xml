@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:orientation="vertical"
+              android:layout_height="match_parent"
+              android:background="#ffffff"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content"
+                  android:paddingBottom="2dp"
+                  android:paddingTop="5dp"
+                  android:paddingLeft="@dimen/album_title_padding"
+                  android:paddingRight="@dimen/album_title_padding"
+                  android:background="#ffffff"
+    >
+
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:id="@+id/tvRequestsPlaceHolder"
+                android:textSize="14dp"
+        />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/requests_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:layout_marginBottom="100dp"
+        />
+
+    </LinearLayout>
+</LinearLayout>

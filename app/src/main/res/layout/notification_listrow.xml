@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:backgroundTint="#FFFFFF"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:layout_margin="10dp"
+    android:id="@+id/notif_layoutcard"
+    >
+    <TextView
+        android:id="@+id/tvNotifId"
+        android:textSize="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+            android:id="@+id/icon_front"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+    >
+
+        <ImageView
+                android:id="@+id/icon_thumbnail"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/lightning"
+            />
+
+        <TextView
+                android:id="@+id/tvNfIcon_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+               android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvNotifTitle"
+        android:textColor="@color/title"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:text="Welcome note"
+        android:visibility="gone"
+        android:layout_toRightOf="@+id/icon_front"
+        />
+    <TextView
+        android:id="@+id/tvNotifBody"
+        android:textSize="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNotifTitle"
+        android:paddingTop="2dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Welcome to malakane service"
+        android:layout_toRightOf="@+id/icon_front"
+        />
+
+    <TextView
+        android:id="@+id/tvNotifTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNotifBody"
+        android:textColor="@color/black"
+        android:paddingTop="2dp"
+        android:layout_toRightOf="@+id/icon_front"
+    />
+
+</RelativeLayout>

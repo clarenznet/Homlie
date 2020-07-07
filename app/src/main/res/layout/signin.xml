@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignIn"
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/lytTiesto"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:text="Homlie Service"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textSize="32sp"
+            app:fontFamily="sans-serif-thin" />
+
+        <ImageView
+            android:layout_width="@dimen/img_width_height"
+            android:layout_height="@dimen/img_width_height"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:layout_above="@+id/textView2223"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:padding="4dp"
+            android:layout_marginTop="90dp"
+            android:layout_above="@+id/textView222"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:text="request services and service men"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView2223"
+            app:fontFamily="sans-serif-condensed-light"/>
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:padding="4dp"
+            android:layout_marginTop="20dp"
+            android:layout_above="@+id/buttonPhoneAuthNext"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:text="service providers database for clean workmanship"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView222"
+            app:fontFamily="sans-serif-condensed-light"/>
+
+        <LinearLayout
+            android:id="@+id/dinah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|top"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/textViewMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                android:text="Please wait until you see the token here" />
+
+            <TextView
+                android:id="@+id/textViewToken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="7uug2rYyXSxVHJOMQDer3gAZUDhFYh4STO15sPzopWIbeHOkHJsI8BKwKEkhhBszMsyXYrQwkOOBu97q"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+            <Button
+                android:id="@+id/buttonCopyToken"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorPrimary"
+                android:text="Copy Token"
+                android:textAllCaps="false"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:layout_marginTop="100dp"
+            android:layout_below="@+id/dinah"
+            android:layout_centerHorizontal="true"
+            android:textAllCaps="false"
+            android:text="Open Dashboard"
+            android:id="@+id/buttonOpenDashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/buttonPhoneAuthNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="50dp"
+            android:background="@color/colorPrimary"
+            android:text="Get Started"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_20"
+            android:layout_alignParentBottom="true"
+
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:background="@color/btn_bg"
+        android:id="@+id/lytUserEmail"
+        android:padding="16dp"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:padding="4dp"
+            android:layout_above="@+id/progressBar1"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:text="What is your email address?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fontFamily="sans-serif-condensed-light"/>
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|top"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+            android:layout_above="@+id/tlView"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="4dp"
+            android:layout_marginTop="40dp"
+            android:id="@+id/tlView"
+            android:inputType="textEmailAddress"
+            android:layout_above="@+id/tlViewConfirm"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_height="wrap_content"
+                android:hint="Please enter your email address"
+                android:id="@+id/edtUserEmail"
+                android:maxLength="30"
+                android:singleLine="true"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="4dp"
+            android:id="@+id/tlViewConfirm"
+            android:inputType="textEmailAddress"
+            android:layout_above="@+id/tvSTerms"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_height="wrap_content"
+                android:hint="Confirm your email address"
+                android:id="@+id/edtConfirmUserEmail"
+                android:maxLength="30"
+                android:singleLine="true"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="center"
+            android:text="Terms and Conditions/Privacy Policy"
+            android:paddingTop="16dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/tvSTerms"
+            android:clickable="true"
+            android:layout_above="@+id/llytcnfq"
+            android:background="@color/colorPrimaryDark"
+            />
+        <RelativeLayout
+            android:id="@+id/llytcnfq"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_above="@+id/buttonPhoneAuth"
+            >
+            <TextView
+                android:id="@+id/tvSchk1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Please read and confirm User Policy/Privacy Policy"/>
+            <CheckBox
+                android:id="@+id/chkS1"
+                android:layout_width="50dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:layout_toRightOf="@id/tvSchk1"
+                />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/buttonPhoneAuth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/red_style"
+            android:text="Next"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_20"
+            android:layout_alignParentBottom="true"
+
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

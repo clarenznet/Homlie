@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.luns.neuro.mlkn">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <dist:module dist:instant="true" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:launchMode="singleTop"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyD-h4qSAn_cu0xq2g2O24StOM_xDABwnIw" />
+        </activity>
+        <provider
+            android:name="com.luns.neuro.mlkn.provider.PlaceContentProvider"
+            android:authorities="com.luns.neuro.mlkn"
+            android:exported="false" />
+
+        <activity
+            android:name=".ServiceCalculator"
+            android:label="select item"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+
+            android:name=".MapsActivity"
+            android:label="address pin"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SignIn"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".My_Profile"
+            android:label="My Profile"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".ProfessionalProfile"
+            android:label="Edit Profile"
+            android:parentActivityName="com.luns.neuro.mlkn.My_Profile"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.My_Profile" />
+        </activity>
+        <activity
+            android:name=".Help"
+            android:label="Help"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+
+        <activity
+            android:name=".Requests"
+            android:label="My history"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".DetailsScreen"
+            android:label="DETAILS"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".CreditCardPay"
+            android:label="credit card"
+            android:parentActivityName="com.luns.neuro.mlkn.DetailsScreen"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.DetailsScreen" />
+        </activity>
+        <activity
+            android:name=".Professionalsinfo"
+            android:label="Professionals Info"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".TermsAndConditions"
+            android:label="Terms and Conditions"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".Feedback"
+            android:label="Feedback"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".Messages"
+            android:label="Messages"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+        <activity
+            android:name=".Main_menu"
+            android:label="select service"
+            android:parentActivityName="com.luns.neuro.mlkn.ScrollingActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.luns.neuro.mlkn.ScrollingActivity" />
+        </activity>
+
+        <!-- Defining our FirebaseMessagingService -->
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

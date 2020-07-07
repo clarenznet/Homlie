@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+            android:background="@color/white"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:textStyle="bold"
+            android:textSize="17dip"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="App Version"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_margin="5dip"
+            android:background="@color/colorPrimaryDark" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:textSize="17dip"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Current Version"/>
+        <TextView
+            android:id="@+id/settingVersion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:text="1.0.3-13082019"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:textSize="15dip"
+            android:textColor="@color/colorPrimary"
+            android:text="Update"
+            android:autoLink=""
+            android:visibility="gone"
+            android:id="@+id/btnUpdate"
+            />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_margin="5dip"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/settingTerms"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="5dip"
+            android:gravity="left"
+            android:text="Release: 1.0.3"/>
+
+
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:layout_margin="5dip"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:textSize="20dip"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Privacy Policy"
+                android:id="@+id/tvPol"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_margin="5dip"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:id="@+id/settingAbout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_margin="5dip"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/action_userpolicy" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_margin="5dip"
+            android:background="@color/colorPrimary" />
+        <!-- Name Label -->
+        <Button
+                android:id="@+id/btngotoPrivacyPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="GO TO SITE"
+                android:textColor="@color/white"
+            android:background="@color/colorPrimary"
+        />
+
+    </LinearLayout>
+</ScrollView>

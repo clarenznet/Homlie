@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/bottom_sheet"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical"
+              app:behavior_hideable="true"
+              app:behavior_peekHeight="0dp"
+              app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+              android:padding="16dp">
+    <androidx.core.widget.NestedScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:fillViewport="false"
+            android:id="@+id/scvDetScroll">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Checkout:"
+                    android:textSize="22dp"
+                    android:textColor="@color/white"
+                    android:background="@color/colorPrimaryDark"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Selected items price information"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:paddingTop="20dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorPrimary"/>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+            >
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order Details"
+                        android:textColor="@color/black"
+                        android:id="@+id/tvOrderData"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/tvOrderData">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total KSh: "
+                    android:textColor="@color/colorPrimary"
+
+                    />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:id="@+id/tvTotalPrice"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+            </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Address Information"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:paddingTop="30dp"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorPrimary"/>
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="geolocation: "
+                      android:textColor="@color/colorPrimaryDark"
+            />
+            <RelativeLayout
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <ImageButton
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="50dp"
+                        android:layout_height="60dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:id="@+id/btnSelectLocation"
+                        android:layout_alignParentLeft="true"
+                        android:elevation="8dp"
+                        android:src="@drawable/mylocation"
+                        android:layout_alignParentStart="true"
+                />
+                <TextView
+                        android:layout_width="300dp"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTaskLocation"
+                        android:text="Nairobi CBD, Cafe Deli"
+                        android:textColor="@color/black"
+                        android:layout_toRightOf="@+id/btnSelectLocation"
+                >
+                </TextView>
+
+
+            </RelativeLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tVMeetingAddress"
+                    android:inputType="text"
+            >
+                <EditText
+                    android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="specific address e.g house no, building name:"
+                        android:id="@+id/edtSpecificAddress"
+                     />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tVTaskDescription"
+                    android:inputType="text"
+            >
+                <EditText
+                    android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_height="wrap_content"
+                        android:hint="to note instructions"
+                        android:id="@+id/edtTaskDescription"
+                        android:lines="2"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="14dp"
+                    android:text="select date mm/dd/yy: "
+            />
+
+            <EditText
+                    android:id="@+id/edtSelectedDate"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:inputType="none"
+                android:textColor="@color/black"
+            />
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="14dp"
+                    android:text="select time 24 hour clock system:"
+            />
+            <EditText
+                    android:id="@+id/edtSelectedTime"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:inputType="none"
+                    android:textColor="@color/black"
+            />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorPrimary"
+                    android:padding="5dp"
+            />
+
+                <Button
+                        android:id="@+id/btn_uploadOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:text="Complete request"
+                        android:background="@color/colorAccent"
+                        android:textColor="@color/white"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
