@@ -1,10 +1,25 @@
 package com.luns.neuro.mlkn;
-import android.app.ActivityOptions;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -27,34 +42,8 @@ import com.luns.neuro.mlkn.DataAdapter.MyRequests;
 import com.luns.neuro.mlkn.DataAdapter.MyRequestsAdapter;
 import com.luns.neuro.mlkn.library.ConnectionDetector;
 import com.luns.neuro.mlkn.library.CustomVolleyRequest;
-import com.luns.neuro.mlkn.library.MainDataPreference;
 import com.luns.neuro.mlkn.library.SharedPrefManager;
 import com.luns.neuro.mlkn.library.User;
-import com.transitionseverywhere.Rotate;
-import com.transitionseverywhere.TransitionManager;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.provider.Settings;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -122,26 +111,13 @@ public class ScrollingActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+            backDropImage();
 //            Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
 //                    R.anim.myanimation);
 //            fab.startAnimation(animation);
 //            Animation animation2 = AnimationUtils.loadAnimation(getApplicationContext(),
 //                    R.anim.clockwise);
 //            fab.startAnimation(animation2);
-            try {
-                backdrop=(NetworkImageView) findViewById(R.id.backdrop);
-
-                String url = BCKDROP_URL.trim();
-                imageLoader = CustomVolleyRequest.getInstance(this.getApplicationContext())
-                        .getImageLoader();
-                imageLoader.get(url, ImageLoader.getImageListener(backdrop,
-                        R.color.btn_bg, R.color.btn_bg));
-                backdrop.setImageUrl(url, imageLoader);
-
-                //    Glide.with(this).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         // background animaton
         idBcgdAnim=findViewById(R.id.idBcgdAnim);
             tvExpl1=findViewById(R.id.tvExpl1);
@@ -196,6 +172,7 @@ public class ScrollingActivity extends AppCompatActivity{
                     // Make sure you call swipeContainer.setRefreshing(false)
                     // once the network request has completed successfully.
                     getData();
+                    backDropImage();
                 }
             });
             // Configure the refreshing colors
@@ -206,6 +183,23 @@ public class ScrollingActivity extends AppCompatActivity{
 
             getData();
     }
+    }
+    private void backDropImage(){
+        try {
+            backdrop=(NetworkImageView) findViewById(R.id.backdrop);
+
+            String url = BCKDROP_URL.trim();
+            imageLoader = CustomVolleyRequest.getInstance(this.getApplicationContext())
+                    .getImageLoader();
+            imageLoader.get(url, ImageLoader.getImageListener(backdrop,
+                    R.color.btn_bg, R.color.btn_bg));
+            backdrop.setImageUrl(url, imageLoader);
+
+            //    Glide.with(this).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     public interface ClickListener {
         void onClick(View view, int position);

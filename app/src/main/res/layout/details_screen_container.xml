@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.luns.neuro.mlkn.DetailsScreen">
+
+    <!-- include main content -->
+    <include layout="@layout/detailsscreen" />
+
+    <!-- include bottom sheet -->
+    <include layout="@layout/bottom_sheet_payment"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

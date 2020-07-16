@@ -1,18 +1,23 @@
 package com.luns.neuro.mlkn;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +26,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
@@ -37,7 +43,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
+import com.luns.neuro.mlkn.Model.AccessToken;
+import com.luns.neuro.mlkn.Model.STKPush;
+import com.luns.neuro.mlkn.Services.DarajaApiClient;
+import com.luns.neuro.mlkn.Services.Utils;
 import com.luns.neuro.mlkn.library.ConnectionDetector;
 import com.luns.neuro.mlkn.library.CustomVolleyRequest;
 import com.luns.neuro.mlkn.library.SessionManager;
@@ -49,11 +60,32 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Hashtable;
+import java.util.Map;
+
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import timber.log.Timber;
+
+import static com.luns.neuro.mlkn.Interceptor.Constants.BUSINESS_SHORT_CODE;
+import static com.luns.neuro.mlkn.Interceptor.Constants.CALLBACKURL;
+import static com.luns.neuro.mlkn.Interceptor.Constants.PARTYB;
+import static com.luns.neuro.mlkn.Interceptor.Constants.PASSKEY;
+import static com.luns.neuro.mlkn.Interceptor.Constants.TRANSACTION_TYPE;
 
 public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallback {
+    ///start of mpesa privates
+
+    private DarajaApiClient mApiClient;
+    private ProgressDialog mProgressDialog;
+    //@BindView(R.id.etAmount)
+    //EditText mAmount;
+    //@BindView(R.id.etPhone)EditText mPhone;
+  //  @BindView(R.id.btnPay)
+//    Button mPay;
+
+    ///end of mpesa privates
     private Button btnAcceptRequest;
     private String strTicketId="",strParentClass="",strOrderSummary="", strOrderTyp="",strOrderTim="";
     private TextView tvOrderSummary,tvOrderTyp, tvTtlCost,tvSpecificLocation,tvGenLocation,tvDateTime,tvCreatedAt,tvToNote;
@@ -64,10 +96,21 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
     private TextView tvStatusDet,tvAgentName, tvAgentId,tvRating;
     private NetworkImageView  nivProfilePhoto;
     private View vw_agent_card,lytavi;
+    LinearLayout llBottomSheetPayment;
+    BottomSheetBehavior bottomSheetBehavior;
+    private EditText edtPayingPhoneNumnber;
+    private TextView tvInvoiceTotal,tvPymntTicketNo;
+    private ImageButton btnEditMyPhoneNumber;
+    private RatingBar ratingbar;
+    private Button btnSendPayment;
+    private String strUpldPymntTicketNo="",strUpldPymntInvoiceTotal="",strUpldPymntPhoneNumber="",strUpldPymntRating="";
+
+
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detailsscreen);
+        setContentView(R.layout.details_screen_container);
 //        String indicator=getIntent().getStringExtra("indicator");
 //        avi= (AVLoadingIndicatorView) findViewById(R.id.avi);
 //        avi.setIndicator(indicator);
@@ -83,6 +126,12 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
         }
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("ticket details");
+        ////////////////////////////
+        llBottomSheetPayment = (LinearLayout) findViewById(R.id.bottom_sheet_payment);
+        bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheetPayment);
+        bottomSheetBehavior.setPeekHeight(0);
+        bottomSheetBehavior.setHideable(true);
+
         btnAcceptRequest=findViewById(R.id.btnAcceptRequest);
         btnAcceptRequest.setText("Complete Ticket");
         //Toast.makeText(getApplicationContext(),strTicketId,Toast.LENGTH_LONG).show();
@@ -90,8 +139,17 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
             @Override
             public void onClick(View v) {
                // confirmPaymentMethod();
-                Intent in = new Intent(getApplicationContext(), CreditCardPay.class);
-                startActivity(in);
+                tvInvoiceTotal.setText(strTcktTtlCost);
+                tvPymntTicketNo.setText(strTcktCode);
+                if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                } else {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+
+//                Intent in = new Intent(getApplicationContext(), CreditCardPay.class);
+  //              startActivity(in);
             }
         });
         tvOrderSummary= findViewById(R.id.tvOrderSummary);
@@ -131,8 +189,89 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
 
         getTicketDetails();
         //avi.show();
+        User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+        edtPayingPhoneNumnber=findViewById(R.id.edtPayingPhoneNumnber);
+        edtPayingPhoneNumnber.setEnabled(false);
+        edtPayingPhoneNumnber.setText(user.getPhonenumber().substring(1));
+
+        tvInvoiceTotal=findViewById(R.id.tvInvoiceTotal);
+        tvPymntTicketNo=findViewById(R.id.tvPymntTicketNo);
+        btnEditMyPhoneNumber=findViewById(R.id.btnEditMyPhoneNumber);
+        btnEditMyPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                edtPhonenumberDialog();
+            }
+        });
+        ratingbar=(RatingBar)findViewById(R.id.rtbAgent);
+        btnSendPayment = findViewById(R.id.btnSendPayment);
+        btnSendPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmTransactionDialog();
+            }
+        });
+        ///some mpesa api stuff
+        mpesaStuffOncreate();
+    }
+
+    private void edtPhonenumberDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("do you want to edit the phone number used to pay this ticket?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                // TODO Auto-generated method stub
+                edtPayingPhoneNumnber.setEnabled(true);
+                edtPayingPhoneNumnber.setSelection(12);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        AlertDialog alert = builder.create();
+        //alert.getWindow().setBackgroundDrawableResource(R.color.btn_bg);
+        alert.show();
 
     }
+    private void confirmTransactionDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Confirm transaction...");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                strUpldPymntTicketNo=tvPymntTicketNo.getText().toString();
+                strUpldPymntInvoiceTotal=tvInvoiceTotal.getText().toString();
+                strUpldPymntPhoneNumber=edtPayingPhoneNumnber.getText().toString();
+                strUpldPymntRating=String.valueOf(ratingbar.getRating());
+                postPaymentData();
+                //               Toast.makeText(getApplicationContext(), rating, Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        AlertDialog alert = builder.create();
+        //alert.getWindow().setBackgroundDrawableResource(R.color.btn_bg);
+        alert.show();
+
+    }
+
     public void hideClick(View view) {
         avi.hide();
         // or avi.smoothToHide();
@@ -500,7 +639,6 @@ private void textAgent(String strAgentPhoneNo){
             String text = String.valueOf(System.currentTimeMillis());
             //myTextView.setText(text);
             getAgentStatus();
-
         }
 
         @Override
@@ -508,7 +646,7 @@ private void textAgent(String strAgentPhoneNo){
             //while(someCondition) {
                 try {
                     //sleep for 1s in background...
-                    Thread.sleep(10000);
+                    Thread.sleep(20000);
                     //and update textview in ui thread
                     publishProgress();
                 } catch (InterruptedException e) {
@@ -518,6 +656,200 @@ private void textAgent(String strAgentPhoneNo){
                 return null;
             //}
         }
+    }
+
+    private String UPLOAD_URL ="https://www.instrov.com/malakane_init/mlkn_uppymnt_data.php";
+    private String KEY_UPPYMNTTICKETNO="uppymnt_ticketno";
+    private String KEY_UPPYMNTINVOICETOTAL="uppymnt_invoicetotal";
+    private String KEY_UPPYMNTPHONENUMBER="uppymnt_phonenumber";
+    private String KEY_UPPYMNTRATING= "uppymnt_rating";
+    StringRequest stringRequest;
+    private ProgressDialog loading;
+
+    private void postPaymentData(){
+        cd = new ConnectionDetector(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            loading = ProgressDialog.show(this,"Sending","Please wait...",false,false);
+            stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String s) {
+                            loading.dismiss();
+                            //Toast.makeText(DetailsScreen.this, ""+s +" done", Toast.LENGTH_LONG).show();
+                            //String phone_number = mPhone.getText().toString();
+                            //String amount = mAmount.getText().toString();
+                            if (s.equals("Success"))
+                            performSTKPush(strUpldPymntPhoneNumber,strUpldPymntInvoiceTotal);
+                            else
+                             Toast.makeText(DetailsScreen.this, "Error!! please try again", Toast.LENGTH_LONG).show();
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            //Dismissing the progress dialog
+                            loading.dismiss();
+                            ////////////////////
+                            if(volleyError instanceof TimeoutError ||volleyError instanceof NoConnectionError){
+                                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error_network_timeout),
+                                        Toast.LENGTH_LONG).show();
+                            }else if (volleyError instanceof AuthFailureError){
+                                //
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                            }else if (volleyError instanceof ServerError){
+                                //
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                            }else if (volleyError instanceof NetworkError){
+                                //
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                            }else if (volleyError instanceof ParseError){
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+
+                            }
+
+                            //stringRequest .setRetryPolicy(new DefaultRetryPolicy(
+                            //  30000,
+                            //    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            //      DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                            //Showing toast
+                            //Toast.makeText(Upload_Fraudster.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    User user = SharedPrefManager.getInstance(getApplicationContext()).getUser();
+                    Map<String,String> params = new Hashtable<String, String>();
+                    //Adding parameters
+                    strUpldPymntTicketNo=tvPymntTicketNo.getText().toString();
+                    strUpldPymntInvoiceTotal=tvInvoiceTotal.getText().toString();
+                    params.put(KEY_UPPYMNTRATING, strUpldPymntRating);
+                    params.put(KEY_UPPYMNTPHONENUMBER,  strUpldPymntPhoneNumber);
+                    params.put(KEY_UPPYMNTINVOICETOTAL, strUpldPymntInvoiceTotal);
+                    params.put(KEY_UPPYMNTTICKETNO, strUpldPymntTicketNo);
+                    //returning parameters
+                    return params;
+                }
+            };
+
+            //Creating a Request Queue
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            int socketTimeout = 30000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            stringRequest.setRetryPolicy(policy);
+            //requestQueue.add(request);
+            //DefaultRetryPolicy  retryPolicy = new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            //requestQueue.setRetryPolicy(retryPolicy);
+            //.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            //Adding request to the queue
+            requestQueue.add(stringRequest);
+        } else {
+            //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
+            //      .setAction("Action", null).show();
+            Snackbar snackbar = Snackbar
+                    .make(llBottomSheetPayment, "No internet connection! Check settings and try again.", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            postPaymentData();                 }
+                    });
+
+// Changing message text color
+            snackbar.setActionTextColor(Color.RED);
+
+// Changing action button text color
+            View sbView = snackbar.getView();
+            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            textView.setTextColor(Color.YELLOW);
+            snackbar.show();
+
+        }
+
+    }
+
+    ////begining of mpesa initiate payment stuff
+
+    private void mpesaStuffOncreate(){
+        ButterKnife.bind(this);
+        mProgressDialog = new ProgressDialog(this);
+        mApiClient = new DarajaApiClient();
+        mApiClient.setIsDebug(true); //Set True to enable logging, false to disable.
+        //mPay.setOnClickListener(this);
+        getAccessToken();
+    }
+    public void getAccessToken() {
+        mApiClient.setGetAccessToken(true);
+        mApiClient.mpesaService().getAccessToken().enqueue(new Callback<AccessToken>() {
+            @Override
+            public void onResponse(@NonNull Call<AccessToken> call, @NonNull retrofit2.Response<AccessToken> response) {
+
+                if (response.isSuccessful()) {
+                    mApiClient.setAuthToken(response.body().accessToken);
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<AccessToken> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
+    public void performSTKPush(String phone_number,String amount) {
+        mProgressDialog.setMessage("Processing your request");
+        mProgressDialog.setTitle("Please Wait...");
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.show();
+        String timestamp = Utils.getTimestamp();
+        STKPush stkPush = new STKPush(
+                BUSINESS_SHORT_CODE,
+                Utils.getPassword(BUSINESS_SHORT_CODE, PASSKEY, timestamp),
+                timestamp,
+                TRANSACTION_TYPE,
+                String.valueOf(amount),
+                Utils.sanitizePhoneNumber(phone_number),
+                PARTYB,
+                Utils.sanitizePhoneNumber(phone_number),
+                CALLBACKURL,
+                strUpldPymntPhoneNumber, //Account reference
+                strUpldPymntTicketNo  //Transaction description
+
+        );
+
+        mApiClient.setGetAccessToken(false);
+
+        //Sending the data to the Mpesa API, remember to remove the logging when in production.
+        mApiClient.mpesaService().sendPush(stkPush).enqueue(new Callback<STKPush>() {
+            @Override
+            public void onResponse(@NonNull Call<STKPush> call, @NonNull retrofit2.Response<STKPush> response) {
+                mProgressDialog.dismiss();
+                try {
+                    if (response.isSuccessful()) {
+                        Timber.d("post submitted to API. %s", response.body());
+                    } else {
+                        Timber.e("Response %s", response.errorBody().string());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<STKPush> call, @NonNull Throwable t) {
+                mProgressDialog.dismiss();
+                Timber.e(t);
+            }
+        });
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
     @Override
     public void onBackPressed() {

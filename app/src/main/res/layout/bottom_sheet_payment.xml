@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_payment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    android:padding="16dp">
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:fillViewport="false"
+        android:id="@+id/scvPymntScroll">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Form:"
+                android:textSize="22dp"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimaryDark"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Make payment by Mpesa to paybill number 504628 of Homlie Services using STK push service"
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:paddingTop="30dp"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="ticket details:"
+                android:textSize="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="30dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ticket Number: "
+                        android:textColor="@color/colorPrimary"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:id="@+id/tvPymntTicketNo"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total KSh: "
+                        android:textColor="@color/colorPrimary"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:id="@+id/tvInvoiceTotal"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="User payment information"
+                android:textSize="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingTop="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="use this phonenumber"
+                android:textColor="@color/colorPrimary"
+                android:layout_margin="3dp"
+                />
+            <RelativeLayout
+                android:layout_marginTop="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="50dp"
+                    android:layout_height="80dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:id="@+id/btnEditMyPhoneNumber"
+                    android:layout_alignParentLeft="true"
+                    android:elevation="8dp"
+                    android:src="@android:drawable/ic_menu_edit"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginRight="5dp"
+                    />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="300dp"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@+id/btnSelectLocation"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/tVMyPhoneNumber"
+                    android:inputType="text"
+                    >
+                    <EditText
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_height="wrap_content"
+                        android:hint="my phone number"
+                        android:id="@+id/edtPayingPhoneNumnber"
+                        android:inputType="phone"
+                        android:maxLength="12"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Please take a moment and rate the agent: "
+                android:textSize="15dp"
+                android:textColor="@color/black"
+                android:paddingTop="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+
+            <RatingBar
+                android:id="@+id/rtbAgent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="72dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"
+                android:padding="5dp"
+                />
+
+            <Button
+                android:id="@+id/btnSendPayment"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:text="Initiate payment"
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
