@@ -87,6 +87,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
 
     ///end of mpesa privates
     private Button btnAcceptRequest;
+    private TextView tvTicketCompleted;
     private String strTicketId="",strParentClass="",strOrderSummary="", strOrderTyp="",strOrderTim="";
     private TextView tvOrderSummary,tvOrderTyp, tvTtlCost,tvSpecificLocation,tvGenLocation,tvDateTime,tvCreatedAt,tvToNote;
     private GoogleMap mMap;
@@ -132,6 +133,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
         bottomSheetBehavior.setPeekHeight(0);
         bottomSheetBehavior.setHideable(true);
 
+        tvTicketCompleted=findViewById(R.id.tvTicketCompleted);
         btnAcceptRequest=findViewById(R.id.btnAcceptRequest);
         btnAcceptRequest.setText("Complete Ticket");
         //Toast.makeText(getApplicationContext(),strTicketId,Toast.LENGTH_LONG).show();
@@ -486,7 +488,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                     if (response.equals("Error"))
 //                        timeToCallBack();
 
-                    //starting our task which update textview every 1000 ms
+                    //starting our task which update textview every 2000 ms
                           new RefreshTask().execute();
 
                     else
@@ -590,6 +592,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
             tvAgentId.setText("Homlie ID: HA20Y00"+strFndId);
             tvRating.setText("Rating: "+strFndRatingScore);
             loadImage(strFndDp);
+            getPaymentStatus();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -851,6 +854,138 @@ private void textAgent(String strAgentPhoneNo){
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    ////////////////////polling for payment confirmation if made
+
+
+    public static final String PYMNTSTATUS_URL= "https://www.instrov.com/malakane_init/mlkn_paymentstatus.php?strpostid=";
+    public static final String JSON_ARRAY_PYMNT = "result";
+    public static final String KEY_PYMNTSTATUS = "strTcktStatus";
+
+
+    private void getPaymentStatus(){
+        cd = new ConnectionDetector(getApplicationContext());
+        isInternetPresent = cd.isConnectingToInternet();
+        if (isInternetPresent) {
+            String strBulk=strTcktCode;
+            String url = PYMNTSTATUS_URL+strBulk;
+            StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //loading.dismiss();
+                    //Toast.makeText(getApplicationContext(),""+response,Toast.LENGTH_SHORT).show();
+
+                    if (response.equals("Error"))
+                        new RefreshTaskPayment().execute();
+                    else
+                        showJSONAPYMNTResponse(response);
+                }
+            },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            //loading.dismiss();
+                            //Showing toast
+                            if(volleyError instanceof TimeoutError ||volleyError instanceof NoConnectionError){
+                                try {
+                                    Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error_network_timeout),
+                                            Toast.LENGTH_LONG).show();
+                                }catch (NullPointerException dsfsd){
+
+                                }
+                            }else if (volleyError instanceof AuthFailureError){
+                                try {
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                }catch (NullPointerException dsfsd){
+
+                                }
+                            }else if (volleyError instanceof ServerError){
+                                try {
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                }catch (NullPointerException dsfsd){
+
+                                }
+                            }else if (volleyError instanceof NetworkError){
+                                try {
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                }catch (NullPointerException dsfsd){
+
+                                }
+                            }else if (volleyError instanceof ParseError){
+                                try {
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                }catch (NullPointerException dsfsd){
+
+                                }
+                            }
+                        }
+                    });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            int socketTimeout = 30000;//30 seconds - change to what you want
+            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            stringRequest.setRetryPolicy(policy);
+            requestQueue.add(stringRequest);
+        } else {
+            //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
+            //      .setAction("Action", null).show();
+            Snackbar snackbar = Snackbar
+                    .make(tvOrderSummary, "No internet connection! Check settings and try again.", Snackbar.LENGTH_INDEFINITE)
+                    .setAction("RETRY", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            getPaymentStatus();
+                        }
+                    });
+// Changing message text color
+            snackbar.setActionTextColor(Color.RED);
+
+// Changing action button text color
+            View sbView = snackbar.getView();
+//            TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+            //          textView.setTextColor(Color.YELLOW);
+            snackbar.show();
+
+        }
+    }
+    private void showJSONAPYMNTResponse(String response){
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        btnAcceptRequest.setVisibility(View.GONE);
+            tvTicketCompleted.setVisibility(View.VISIBLE);
+
+        //} catch (JSONException e) {
+          //  e.printStackTrace();
+        //}
+        // textViewResult.setText("Name:\t"+name+"\nAddress:\t" +address+ "\nVice Chancellor:\t"+ vc);
+    }
+    class RefreshTaskPayment extends AsyncTask {
+
+        @Override
+        protected void onProgressUpdate(Object... values) {
+            super.onProgressUpdate(values);
+            String text = String.valueOf(System.currentTimeMillis());
+            //myTextView.setText(text);
+            getPaymentStatus();
+        }
+
+        @Override
+        protected Object doInBackground(Object... params) {
+            //while(someCondition) {
+            try {
+                //sleep for 1s in background...
+                Thread.sleep(20000);
+                //and update textview in ui thread
+                publishProgress();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+
+            }
+            return null;
+            //}
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

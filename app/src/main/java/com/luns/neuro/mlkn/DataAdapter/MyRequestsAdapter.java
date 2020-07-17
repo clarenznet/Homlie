@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.luns.neuro.mlkn.R;
 
 import java.util.List;
@@ -66,13 +68,11 @@ public class MyRequestsAdapter extends RecyclerView.Adapter<MyRequestsAdapter.My
         final MyRequests noty = allMyRequestsList.get(position);
         holder.tvMyRequestsId.setText(noty.getStrRequestId());
         holder.tvMyRequestsTitle.setText(noty.getStrRequestTitle());
-        holder.tvMyRequestsBody.setText("Service ticket id #"+noty.getStrRequestId()+" created");
+        holder.tvMyRequestsBody.setText(noty.getStrRequestTcktCode()+" service ticket created");
         holder.tvMyRequestsStatus.setText(noty.getStrRequestStatus());
         holder.tvMyRequestsTime.setText(noty.getStrCtreatedAt());
         //holder.tvMyRequestsIcon_text.setText(noty.getStrRequestTitle().substring(0, 1));
         //applyProfilePicture(holder, noty.getStrRequestColor());
-
-
         //holder.offerimage.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(final View v) {

@@ -448,5 +448,20 @@
             android:layout_gravity="bottom"
         android:visibility="gone"
     />
+    <TextView
+        android:id="@+id/tvTicketCompleted"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/text_20"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:text="Ticket Completed Successfully, find corresponding receipt in your apps messages"
+        />
+
 </LinearLayout>
 </ScrollView>

@@ -60,6 +60,7 @@ public class ScrollingActivity extends AppCompatActivity{
     private MyRequestsAdapter myrequestsAdapter;
     public static final String DATA_URL = "https://www.instrov.com/malakane_init/mlkn_getmyrequests.php?struserid=";
     public static final String KEY_REQUESTID = "fr_id";
+    public static final String KEY_REQUESTTCKTCODE = "fr_tcktcode";
     public static final String KEY_REQUESTTITLE = "fr_funditype";
     public static final String KEY_REQUESTBODY = "fr_taskdetail";
     public static final String KEY_REQUESTTIME = "fr_taskdatetime";
@@ -345,7 +346,7 @@ public class ScrollingActivity extends AppCompatActivity{
         }
 
     }
-    String strRequestId= "",strRequestTitle= "",strRequestBody= "",strRequestTime= "",strRequestColor= "",strRequestStatus="",strCtreatedAt="";
+    String strRequestId= "",strRequestTcktCode="",strRequestTitle= "",strRequestBody= "",strRequestTime= "",strRequestColor= "",strRequestStatus="",strCtreatedAt="";
 
     private void showJSON(String response){
         try {
@@ -358,13 +359,15 @@ public class ScrollingActivity extends AppCompatActivity{
                 // JSONObject c = searchResultsArray.getJSONObject(i);
                 JSONObject collegeData = result.getJSONObject(i);
                 strRequestId = collegeData.getString(KEY_REQUESTID);
+                strRequestTcktCode = collegeData.getString(KEY_REQUESTTCKTCODE);
                 strRequestTitle =collegeData.getString(KEY_REQUESTTITLE);
                 strRequestBody = collegeData.getString(KEY_REQUESTBODY);
                 strRequestTime = collegeData.getString(KEY_REQUESTTIME);
                 strRequestColor = collegeData.getString(KEY_REQUESTCOLOR);
                 strRequestStatus= collegeData.getString(KEY_REQUESTSTATUS);
                 strCtreatedAt = collegeData.getString(KEY_CREATEDAT);
-                MyRequests ordrs = new MyRequests(strRequestId,strRequestTitle,strRequestBody,strRequestTime,strRequestColor,strRequestStatus,strCtreatedAt);
+                strRequestTcktCode = collegeData.getString(KEY_REQUESTTCKTCODE);
+                MyRequests ordrs = new MyRequests(strRequestId,strRequestTcktCode,strRequestTitle,strRequestBody,strRequestTime,strRequestColor,strRequestStatus,strCtreatedAt);
                 myrequestsList.add(ordrs);
                 myrequestsAdapter.notifyDataSetChanged();
                 //Toast.makeText(getApplicationContext(),strTitle+","+strPriceRange+","+strOrderId,Toast.LENGTH_LONG).show();
