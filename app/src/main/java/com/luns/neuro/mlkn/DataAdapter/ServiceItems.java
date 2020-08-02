@@ -11,7 +11,6 @@ public class ServiceItems {
     private String strArticleIconUrl;
     private int intQuantityValue;
     private boolean isSelected;
-
     public ServiceItems() {
     }
 

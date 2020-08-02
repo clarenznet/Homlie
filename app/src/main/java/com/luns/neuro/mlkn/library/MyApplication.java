@@ -2,9 +2,11 @@ package com.luns.neuro.mlkn.library;
 
 import android.app.Application;
 import android.text.TextUtils;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.facebook.stetho.Stetho;
 
 public class MyApplication extends Application {
 
@@ -18,7 +20,10 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /// to remove stetho
+        Stetho.initializeWithDefaults(this);
         mInstance = this;
+
     }
 
     public static synchronized MyApplication getInstance() {

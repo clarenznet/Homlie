@@ -5,7 +5,6 @@ package com.luns.neuro.mlkn.DataAdapter;
  */
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.luns.neuro.mlkn.R;
 
 import java.util.List;
-import java.util.Random;
 
 //import com.squareup.picasso.Picasso;
 
@@ -33,25 +35,7 @@ public class MyRequestsAdapter extends RecyclerView.Adapter<MyRequestsAdapter.My
     private List<MyRequests> allMyRequestsList;
 
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        //public TextView tvNotifId, tvNotifTitle,tvNotifBody,tvNotifTime,tvNfIconText;
-        public TextView tvMyRequestsId,tvMyRequestsIcon_text,tvMyRequestsTitle,tvMyRequestsBody,tvMyRequestsTime,tvMyRequestsStatus;
-        public ImageView menuIcon;
-        public View myrequests_layoutcard;
-
-        public MyViewHolder(View view) {
-            super(view);
-            tvMyRequestsId = (TextView) view.findViewById(R.id.tvMyRequestsId);
-            tvMyRequestsTitle = (TextView) view.findViewById(R.id.tvMyRequestsTitle);
-            tvMyRequestsBody = (TextView) view.findViewById(R.id.tvMyRequestsBody);
-            tvMyRequestsStatus = (TextView) view.findViewById(R.id.tvMyRequestsStatus);
-            tvMyRequestsTime = (TextView) view.findViewById(R.id.tvMyRequestsTime);
-            tvMyRequestsIcon_text = (TextView) view.findViewById(R.id.tvMyRequestsIcon_text);
-            menuIcon = (ImageView) view.findViewById(R.id.icon_thumbnail);
-            myrequests_layoutcard=view.findViewById(R.id.myrequests_layoutcard);
-        }
-    }
+    Context context;
     public MyRequestsAdapter(List<MyRequests>allMyRequestsList) {
         this.mContext = mContext;
         this.allMyRequestsList = allMyRequestsList;
@@ -66,13 +50,40 @@ public class MyRequestsAdapter extends RecyclerView.Adapter<MyRequestsAdapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final MyRequests noty = allMyRequestsList.get(position);
-        holder.tvMyRequestsId.setText(noty.getStrRequestId());
+        //holder.tvMyRequestsId.setText(noty.getStrRequestTypeUrl());
         holder.tvMyRequestsTitle.setText(noty.getStrRequestTitle());
-        holder.tvMyRequestsBody.setText(noty.getStrRequestTcktCode()+" service ticket created");
+        holder.tvMyRequestsBody.setText("Ticket ID: " + noty.getStrRequestTcktCode());
         holder.tvMyRequestsStatus.setText(noty.getStrRequestStatus());
         holder.tvMyRequestsTime.setText(noty.getStrCtreatedAt());
+        //holder.tvMyRequestsIcon_text.setText(noty.getStrRequestTypeUrl());
+        try {
+
+            RequestOptions options = new RequestOptions()
+                    .centerCrop()
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.imagenotfound)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .priority(Priority.HIGH)
+                    .dontAnimate()
+                    .dontTransform();
+            context = holder.itemView.getContext();
+
+
+            Glide.with(context)
+                    .load(noty.getStrRequestTypeUrl())
+                    .apply(options)
+                    .into(holder.menuIcon);
+        } catch (NullPointerException df) {
+
+        }
+
+//        imageLoader = CustomVolleyRequest.getInstance(mContext).getImageLoader();
+//        imageLoader.get(noty.getStrRequestTypeUrl(), ImageLoader.getImageListener(holder.menuIcon, R.drawable.placer, android.R.drawable.ic_dialog_alert));
+//        holder.menuIcon.setImageUrl(noty.getStrRequestTypeUrl(), imageLoader);
+//
+
         //holder.tvMyRequestsIcon_text.setText(noty.getStrRequestTitle().substring(0, 1));
-        //applyProfilePicture(holder, noty.getStrRequestColor());
+        //applyProfilePicture(holder, noty.getStrRequestTypeUrl());
         //holder.offerimage.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(final View v) {
@@ -86,29 +97,46 @@ public class MyRequestsAdapter extends RecyclerView.Adapter<MyRequestsAdapter.My
 //
 //        });
 
+
     }
-    private void applyProfilePicture(MyViewHolder holder,String requestColor) {
-        Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
+    private void applyProfilePicture(MyViewHolder holder, String strIconurl) {
+        //Random rnd = new Random();
+        //int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 //        view.setBackgroundColor(color);
-        holder.menuIcon.setImageResource(R.drawable.bg_circle);
-        try {
-            if (requestColor.equals("") ||requestColor.isEmpty()||requestColor.equals(null)) {
-                holder.menuIcon.setColorFilter(Color.parseColor("#00afff"));
-                holder.tvMyRequestsStatus.setBackgroundColor(Color.parseColor("#00afff"));
-            } else {
-                holder.menuIcon.setColorFilter(Color.parseColor(requestColor));
-                holder.tvMyRequestsStatus.setBackgroundColor(Color.parseColor(requestColor));
-            }
-        }catch (NullPointerException ty){
+        //holder.menuIcon.setImageResource(R.drawable.bg_circle);
 
-        }
 
-        holder.tvMyRequestsIcon_text.setVisibility(View.VISIBLE);
+    }
+
+    //    List<MyRequests>allMyRequestsList
+    public void setFilter(List<MyRequests> data) {
+        this.allMyRequestsList.clear();
+        this.allMyRequestsList.addAll(data);
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
         return allMyRequestsList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        //public TextView tvNotifId, tvNotifTitle,tvNotifBody,tvNotifTime,tvNfIconText;
+        public TextView tvMyRequestsId, tvMyRequestsIcon_text, tvMyRequestsTitle, tvMyRequestsBody, tvMyRequestsTime, tvMyRequestsStatus;
+        public ImageView menuIcon;
+        public View myrequests_layoutcard;
+
+        public MyViewHolder(View view) {
+            super(view);
+            tvMyRequestsId = view.findViewById(R.id.tvMyRequestsId);
+            tvMyRequestsTitle = view.findViewById(R.id.tvMyRequestsTitle);
+            tvMyRequestsBody = view.findViewById(R.id.tvMyRequestsBody);
+            tvMyRequestsStatus = view.findViewById(R.id.tvMyRequestsStatus);
+            tvMyRequestsTime = view.findViewById(R.id.tvMyRequestsTime);
+            tvMyRequestsIcon_text = view.findViewById(R.id.tvMyRequestsIcon_text);
+            menuIcon = view.findViewById(R.id.icon_thumbnail);
+            myrequests_layoutcard = view.findViewById(R.id.myrequests_layoutcard);
+        }
     }
 
 }

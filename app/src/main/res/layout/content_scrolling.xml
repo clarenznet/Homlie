@@ -17,16 +17,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
 >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/tvExpl1"
-        android:textColor="@color/black22"
-        android:text="Welome Homlie, you have no orders pending yet." />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dashboard_recycler_view"
             android:layout_width="match_parent"
@@ -35,24 +25,78 @@
             android:layout_marginBottom="4dp"
             android:nestedScrollingEnabled="false"
             android:scrollbars="vertical" />
-      <ImageView
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:elevation="3dp"
+            android:padding="4dp"
+            app:cardCornerRadius="3dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <ImageView
           android:layout_width="match_parent"
-          android:layout_height="200dp"
+                    android:layout_height="300dp"
           android:background="@drawable/createvector"
-          android:visibility="gone"
           android:id="@+id/idBcgdAnim"
           android:layout_gravity="center"
           android:layout_marginBottom="4dp"
+                    android:padding="2dp"
           />
+
+                <TextView
+                    android:id="@+id/tvExpl1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:padding="3dp"
+                    android:text="Welcome to Homlie, you have no orders pending yet."
+                    android:textAlignment="center"
+                    android:textColor="@color/black22"
+                    android:textSize="16sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:id="@+id/tvExpl2"
             android:textColor="@color/black22"
             android:layout_gravity="center"
             android:layout_margin="4dp"
-            android:text="You can create one easily by clicking on the add button and let us relieve your load" />
+            android:fontFamily="@font/roboto_regular"
+            android:padding="3dp"
+            android:text="create one easily by clicking on the floating button ..."
+            android:textAlignment="center"
+            android:textSize="16sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Homlie Sevices APP"
+            android:textAlignment="center"
+            android:textColor="@color/black22"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Copyright 2020"
+            android:textAlignment="center"
+            android:textColor="@color/black22"
+            android:textSize="12sp" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,15 +1,11 @@
 package com.luns.neuro.mlkn;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -41,7 +37,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.luns.neuro.mlkn.DataAdapter.FundiTypes;
 import com.luns.neuro.mlkn.DataAdapter.FundiTypesAdapter;
 import com.luns.neuro.mlkn.library.ConnectionDetector;
-import com.luns.neuro.mlkn.library.SharedPrefManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,12 +59,19 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
     private String strActionSummary="",strSelectedService="";
     private String strUserPhonenumber="",strUserFirebaseId="",strUserEmailAddress="";
 
+//    private SQLiteManagerMainMenu sqLiteManagerMainMenu;
+//    private SharedPreferences preferencesMainMenu;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu_activity);
+//        sqLiteManagerMainMenu = new SQLiteManagerMainMenu(this);
+//        preferencesMainMenu = PreferenceManager.getDefaultSharedPreferences(this);
+
         progressBar =  findViewById(R.id.progressBar1);
-        init_ft_recyclerview = (RecyclerView) findViewById(R.id.ft_recycler_view);
+        init_ft_recyclerview = findViewById(R.id.ft_recycler_view);
         ftList = new ArrayList<>();
         ftAdapter = new FundiTypesAdapter(this, ftList,this);
         RecyclerView.LayoutManager ftLayoutManager = new LinearLayoutManager(this);
@@ -86,8 +88,11 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
                 if (isInternetPresent) {
                     FundiTypes ft = ftList.get(position);
                     strSelectedService=ft.getStrFtTitle();
-                    //Toast.makeText(getApplicationContext(), ft.getStrFtTitle(), Toast.LENGTH_SHORT).show();
+//                String strCacheData = preferencesMainMenu.getString("strResponseJson",null);
+
+                    //                   Toast.makeText(getApplicationContext(), ""+strCacheData, Toast.LENGTH_SHORT).show();
                     Intent in = new Intent(getApplicationContext(), ServiceCalculator.class);
+//                    if (strServerResponseResultData)
                     in.putExtra("strServerResponseResultData",strServerResponseResultData);
                     in.putExtra("strSelectedService",strSelectedService);
                    // Bundle bndlAnimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.slideinleft, R.anim.slideinright).toBundle();
@@ -114,9 +119,54 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
 
             }
         }));
+//        ArrayList cache = sqLiteManagerMainMenu.getData();
+//        boolean isCacheExpire = false;
+//        long cacheTime = preferencesMainMenu.getLong("cache", 0);
+//
+//        if (cacheTime > 0) {
+//            long currentTime = new Date().getTime();
+//            long difference = currentTime - cacheTime;
+//            long seconds = difference / 1000;
+//
+//            if (seconds > 30) {
+//                isCacheExpire = true;
+//            }
+//        }
+//        showData();
+//        //if (cache.size() > 0 && !isCacheExpire) {
+//        if (cache.size() == 0 || isCacheExpire) {
+////                myrequestsList = cache;
+////                showData();
+////            } else {
+//            //Toast.makeText(getApplicationContext(),"geting Data from Server",Toast.LENGTH_LONG).show();
+//            getInitData();
+//        }
+
+
         getInitData();
 
     }
+
+//    private void showData() {
+//
+//        ArrayList cache = sqLiteManagerMainMenu.getData();
+//        boolean isCacheExpire = false;
+//        long cacheTime = preferencesMainMenu.getLong("cache", 0);
+//
+//        if (cacheTime > 0) {
+//            long currentTime = new Date().getTime();
+//            long difference = currentTime - cacheTime;
+//            long seconds = difference / 1000;
+//
+//            if (seconds > 30) {
+//                isCacheExpire = true;
+//            }
+//        }
+//        ftList.clear();
+//        ftList = cache;
+//        ftAdapter.setFilter(ftList);
+//        // progressBar.setVisibility(View.GONE);
+//    }
 
     public interface ClickListener {
         void onClick(View view, int position);
@@ -184,6 +234,7 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
 //                lazyLoader(blnLL);
                     ftList.clear();
                     ftAdapter.notifyDataSetChanged();
+
                     showJSONInitData(response);
                     strServerResponseResultData=response;
                 }
@@ -195,13 +246,13 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
                                 Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error_network_timeout),
                                         Toast.LENGTH_LONG).show();
                             } else if (volleyError instanceof AuthFailureError) {
-                                Toast.makeText(getApplicationContext(), ""+volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
                             } else if (volleyError instanceof ServerError) {
-                                Toast.makeText(getApplicationContext(), ""+volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
                             } else if (volleyError instanceof NetworkError) {
-                                Toast.makeText(getApplicationContext(), ""+volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
                             } else if (volleyError instanceof ParseError) {
-                                Toast.makeText(getApplicationContext(), ""+volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -209,6 +260,7 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
+            stringRequest.setShouldCache(false);
             requestQueue.add(stringRequest);
         } else {
             //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
@@ -226,7 +278,7 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
             snackbar.setActionTextColor(Color.RED);
 // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
 
@@ -238,6 +290,8 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
     ArrayList<String> servicesArray = new ArrayList<String>();
     public void showJSONInitData(String response){
         try {
+//            sqLiteManagerMainMenu.deleteOldCache();
+            ftList.clear();
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray(JSON_ARRAY_FT);
             //   Log.e(TAG, "Array: " + ""+result);
@@ -262,10 +316,18 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
 
                 String[] separatorArrayA = strServiceElement.split("@@");
                 FundiTypes fts = new FundiTypes(""+v, separatorArrayA[0], separatorArrayA[1], separatorArrayA[2]);
+                //              sqLiteManagerMainMenu.addData(fts);
                 ftList.add(fts);
                 ftAdapter.notifyDataSetChanged();
                 v++;
             }
+//            preferencesMainMenu.edit().putLong("cache", new Date().getTime()).apply();
+//
+//            SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
+//            settings.edit().remove("strResponseJson").commit();
+//            preferencesMainMenu.edit().putString("strResponseJson",  strServerResponseResultData).commit();
+//
+//            ftAdapter.setFilter(ftList);
         } catch (JSONException e) {
             e.printStackTrace();
         }

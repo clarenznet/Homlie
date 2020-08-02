@@ -27,6 +27,7 @@
                     android:textStyle="bold"
                         android:textColor="@color/white"
                     android:background="@color/colorPrimary"
+                    android:fontFamily="@font/roboto_medium"
                         android:elevation="3dp"/>
 
     </androidx.cardview.widget.CardView>

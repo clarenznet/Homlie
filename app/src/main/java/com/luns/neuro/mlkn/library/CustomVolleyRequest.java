@@ -6,8 +6,14 @@ package com.luns.neuro.mlkn.library;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
 import androidx.collection.LruCache;
-import com.android.volley.*;
+
+import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
@@ -23,7 +29,7 @@ public class CustomVolleyRequest {
 
 
     private CustomVolleyRequest(Context context) {
-        this.context = context;
+        CustomVolleyRequest.context = context;
         this.requestQueue = getRequestQueue();
 
         imageLoader = new ImageLoader(requestQueue,
@@ -62,6 +68,7 @@ public class CustomVolleyRequest {
                //     request.setRetryPolicy(new DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     DefaultRetryPolicy retryPolicy = new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
                     request.setRetryPolicy(retryPolicy);
+                    request.setShouldCache(true);
 
                     return add(request);
 

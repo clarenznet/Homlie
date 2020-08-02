@@ -121,14 +121,14 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
             //strParentClass = extras.getString("parentclass");
             //strOrderSummary= extras.getString("strOrderSummary");
             //strOrderTyp = extras.getString("strOrderTyp");
-            strTicketId = extras.getString("strTicketId");
+            strTicketId = extras.getString("strTicketCode");
         }catch (NullPointerException f){
             ///////////////////
         }
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle("ticket details");
         ////////////////////////////
-        llBottomSheetPayment = (LinearLayout) findViewById(R.id.bottom_sheet_payment);
+        llBottomSheetPayment = findViewById(R.id.bottom_sheet_payment);
         bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheetPayment);
         bottomSheetBehavior.setPeekHeight(0);
         bottomSheetBehavior.setHideable(true);
@@ -205,7 +205,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                 edtPhonenumberDialog();
             }
         });
-        ratingbar=(RatingBar)findViewById(R.id.rtbAgent);
+        ratingbar = findViewById(R.id.rtbAgent);
         btnSendPayment = findViewById(R.id.btnSendPayment);
         btnSendPayment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -363,18 +363,18 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                                         Toast.LENGTH_LONG).show();
                             }else if (volleyError instanceof AuthFailureError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ServerError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof NetworkError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ParseError){
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -509,25 +509,25 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                                 }
                             }else if (volleyError instanceof AuthFailureError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                             }catch (NullPointerException dsfsd){
 
                             }
                             }else if (volleyError instanceof ServerError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                         }catch (NullPointerException dsfsd){
 
                         }
                             }else if (volleyError instanceof NetworkError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
             }catch (NullPointerException dsfsd){
 
             }
                             }else if (volleyError instanceof ParseError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
         }catch (NullPointerException dsfsd){
 
         }
@@ -628,7 +628,7 @@ private void textAgent(String strAgentPhoneNo){
 
     I.setData(Uri.parse("smsto:"));
     I.setType("vnd.android-dir/mms-sms");
-    I.putExtra("address", new String (strAgentPhoneNo));
+    I.putExtra("address", strAgentPhoneNo);
     I.putExtra("sms_body","");
     startActivity(I);
 }
@@ -700,18 +700,18 @@ private void textAgent(String strAgentPhoneNo){
                                         Toast.LENGTH_LONG).show();
                             }else if (volleyError instanceof AuthFailureError){
                                 //
-                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ServerError){
                                 //
-                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof NetworkError){
                                 //
-                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ParseError){
-                                Toast.makeText(DetailsScreen.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(DetailsScreen.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
 
@@ -768,7 +768,7 @@ private void textAgent(String strAgentPhoneNo){
 
 // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
 
@@ -818,9 +818,9 @@ private void textAgent(String strAgentPhoneNo){
                 Utils.sanitizePhoneNumber(phone_number),
                 PARTYB,
                 Utils.sanitizePhoneNumber(phone_number),
-                CALLBACKURL,
-                strUpldPymntPhoneNumber, //Account reference
-                strUpldPymntTicketNo  //Transaction description
+                CALLBACKURL + strUpldPymntTicketNo,
+                strUpldPymntTicketNo, //Account reference
+                "clientapp" //Transaction description
 
         );
 
@@ -895,25 +895,25 @@ private void textAgent(String strAgentPhoneNo){
                                 }
                             }else if (volleyError instanceof AuthFailureError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                                 }catch (NullPointerException dsfsd){
 
                                 }
                             }else if (volleyError instanceof ServerError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                                 }catch (NullPointerException dsfsd){
 
                                 }
                             }else if (volleyError instanceof NetworkError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                                 }catch (NullPointerException dsfsd){
 
                                 }
                             }else if (volleyError instanceof ParseError){
                                 try {
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
                                 }catch (NullPointerException dsfsd){
 
                                 }

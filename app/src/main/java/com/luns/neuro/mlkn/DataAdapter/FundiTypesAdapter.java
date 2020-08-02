@@ -11,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.luns.neuro.mlkn.R;
-import com.luns.neuro.mlkn.library.CustomVolleyRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,18 +38,11 @@ public class FundiTypesAdapter extends RecyclerView.Adapter<FundiTypesAdapter.My
     //private NetworkImageView thumbnail;
 
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvFtId, tvFtTitle,tvFtDescription,tvFtIconText;
-        public NetworkImageView dpFtThumbnail;
-        public MyViewHolder(View view) {
-            super(view);
-            tvFtId = (TextView) view.findViewById(R.id.tvFtId);
-            tvFtTitle = (TextView) view.findViewById(R.id.tvFtTitle);
-            dpFtThumbnail = (NetworkImageView) view.findViewById(R.id.dpFtThumbnail);
-            tvFtDescription = (TextView) view.findViewById(R.id.tvFtDescription);
-            tvFtIconText = (TextView) view.findViewById(R.id.tvFtIcon_text);
-        }
+    //    List<MyRequests>allMyRequestsList
+    public void setFilter(List<FundiTypes> data) {
+        this.allFtFiltered.clear();
+        this.allFtFiltered.addAll(data);
+        notifyDataSetChanged();
     }
 
     public FundiTypesAdapter(Context mContext, List<FundiTypes> allFt, FundiTypesAdapterListener listener) {
@@ -127,5 +120,20 @@ public class FundiTypesAdapter extends RecyclerView.Adapter<FundiTypesAdapter.My
     public interface FundiTypesAdapterListener {
         void onFundiTypeSelected(FundiTypes all);
     }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvFtId, tvFtTitle, tvFtDescription, tvFtIconText;
+        public NetworkImageView dpFtThumbnail;
+
+        public MyViewHolder(View view) {
+            super(view);
+            tvFtId = view.findViewById(R.id.tvFtId);
+            tvFtTitle = view.findViewById(R.id.tvFtTitle);
+            dpFtThumbnail = view.findViewById(R.id.dpFtThumbnail);
+            tvFtDescription = view.findViewById(R.id.tvFtDescription);
+            tvFtIconText = view.findViewById(R.id.tvFtIcon_text);
+        }
+    }
+
 
 }

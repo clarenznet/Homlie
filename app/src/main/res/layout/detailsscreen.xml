@@ -17,10 +17,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/tvOrderTyp"
-                android:textSize="22dip"
+            android:fontFamily="@font/roboto_bold"
                 android:text="request details:"
                 android:textColor="@color/black"
                 android:layout_marginBottom="3dip"
+            android:textSize="22sp"
         />
 
     <TextView
@@ -28,8 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/my_order_summary"
-        android:textSize="18dip"
         android:text="ticket summary"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         />
     <androidx.cardview.widget.CardView
@@ -45,13 +47,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvOrderSummary"
-                android:textSize="14dip"
                 android:text="order summary:"
             android:padding="3dip"
             android:layout_margin="2dp"
             android:paddingTop="0dp"
             android:textColor="@color/black"
-        />
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="16sp"
+
+            />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -59,23 +63,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvOrderTimeHdr"
-                android:textSize="16dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
                 android:text="Total KSh: "
                 android:textColor="@color/colorPrimary"
                 android:padding="3dip"
                 android:layout_margin="2dp"
-                android:textStyle="bold"
                 />
             <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvOrderTime"
-            android:textSize="16dp"
-            android:text="time:"
             android:padding="3dip"
                 android:textColor="@color/black"
-                android:textStyle="bold"
             android:layout_margin="2dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="16sp"
+
                 android:layout_toEndOf="@+id/tvOrderTimeHdr"
                 /></RelativeLayout>
         </LinearLayout>
@@ -85,9 +89,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/locationinfo"
-        android:textSize="18dip"
         android:text="ticket location:"
         android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16sp"
         />
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -106,9 +111,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvSpecificLocationTitle"
-                    android:textSize="14dp"
                     android:text="specific location: "
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"
                     />
                 <TextView
@@ -117,10 +123,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvSpecificLocation"
-                    android:textSize="14dp"
                     android:text="specific location"
                     android:textColor="@color/black"
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="16sp"
                     />
 
             </RelativeLayout>
@@ -132,10 +139,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvGenLocationTitle"
-                    android:textSize="14dp"
                     android:text="general location: "
                     android:layout_margin="3dip"
                     android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
                     />
                 <TextView
                     android:layout_toRightOf="@+id/tvGenLocationTitle"
@@ -143,10 +151,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvGenLocation"
-                    android:textSize="14dp"
                     android:text="general location"
                     android:textColor="@color/black"
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="16sp"
                     />
 
             </RelativeLayout>
@@ -155,11 +164,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvLocationPin"
-                android:textSize="14dp"
                 android:text="location pin: "
             android:textColor="@color/colorPrimary"
             android:layout_margin="3dip"
-        />
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="16sp"
+
+            />
         <fragment
             android:id="@+id/map"
             class="com.google.android.gms.maps.SupportMapFragment"
@@ -171,9 +182,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/work_status"
-        android:textSize="18dip"
         android:text="ticket progress:"
         android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16sp"
         />
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -193,10 +205,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvStatus"
-                    android:textSize="14dp"
                     android:text="status:        "
                     android:textColor="@color/colorPrimary"
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -220,13 +233,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvStatusDet"
-                    android:textSize="20dip"
                     android:text=""
                     android:padding="4dip"
                     android:textColor="@color/white"
                     android:background="@color/colorPrimary"
                     android:layout_margin="3dip"
                     android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="20sp"
                     />
 
             </RelativeLayout>
@@ -239,10 +253,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvDateTimeTitle"
-                    android:textSize="14dp"
                     android:text="start time:  "
                     android:layout_margin="3dip"
                     android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
+
                     />
                 <TextView
                     android:layout_toRightOf="@+id/tvDateTimeTitle"
@@ -250,10 +266,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvDateTime"
-                    android:textSize="14dp"
                     android:text="start time"
                     android:textColor="@color/black"
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="16sp"
                     />
 
             </RelativeLayout>
@@ -265,10 +282,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvCreatedAtTitle"
-                    android:textSize="14dp"
                     android:text="created at:  "
                     android:layout_margin="3dip"
                     android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
                     />
                 <TextView
                     android:layout_toRightOf="@+id/tvCreatedAtTitle"
@@ -276,10 +294,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvCreatedAt"
-                    android:textSize="14dp"
                     android:text="created at"
                     android:textColor="@color/black"
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="16sp"
                     />
 
             </RelativeLayout>
@@ -291,10 +310,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvToNoteTitle"
-                    android:textSize="14dp"
                     android:text="comments:  "
                     android:layout_margin="3dip"
                     android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp"
+
                     />
                 <TextView
                     android:layout_toRightOf="@+id/tvToNoteTitle"
@@ -302,10 +323,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvToNote"
-                    android:textSize="14dp"
                     android:text="to notes"
                     android:textColor="@color/black"
                     android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="16sp"
                     />
 
             </RelativeLayout>
@@ -326,10 +348,12 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/tvServicePerson"
-                        android:textSize="18dip"
                         android:text="assigned agent:"
                         android:textColor="@color/colorPrimaryDark"
                         android:layout_margin="3dip"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="16sp"
+
                         />
 
                 <LinearLayout
@@ -369,17 +393,18 @@
                             android:layout_height="wrap_content"
                             android:text=""
                             android:textColor="@color/black"
-                            android:textSize="17sp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="16sp"
                             />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:text=""
-                            android:textStyle="bold"
-                            android:textSize="12sp"
                             android:id="@+id/tvAgentId"
                             android:textColor="@color/colorAccent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textSize="16sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:textStyle="bold"
@@ -455,11 +480,12 @@
         android:background="@color/colorAccent"
         android:textAllCaps="true"
         android:textColor="#ffffff"
-        android:textSize="@dimen/text_20"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="bottom"
         android:visibility="gone"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="16sp"
         android:text="Ticket Completed Successfully, find corresponding receipt in your apps messages"
         />
 

@@ -4,7 +4,7 @@ package com.luns.neuro.mlkn.DataAdapter;
  * Created by Clarence on 7/31/2016.
  */
 public class MyRequests {
-    private String strRequestId;
+    private String strRequestTypeUrl;
     private String strRequestTcktCode;
     private String strRequestTitle;
     private String strRequestBody;
@@ -14,8 +14,9 @@ public class MyRequests {
     private String strRequestStatus;
     public MyRequests() {
     }
-    public MyRequests(String strRequestId, String strRequestTcktCode, String strRequestTitle, String strRequestBody, String strRequestTime, String strRequestColor, String strRequestStatus, String strCtreatedAt) {
-        this.strRequestId = strRequestId;
+
+    public MyRequests(String strRequestTypeUrl, String strRequestTcktCode, String strRequestTitle, String strRequestBody, String strRequestTime, String strRequestColor, String strRequestStatus, String strCtreatedAt) {
+        this.strRequestTypeUrl = strRequestTypeUrl;
         this.strRequestTcktCode = strRequestTcktCode;
         this.strRequestTitle = strRequestTitle;
         this.strRequestBody = strRequestBody;
@@ -25,11 +26,12 @@ public class MyRequests {
         this.strRequestStatus = strRequestStatus;
     }
 
-    public String getStrRequestId() {
-        return strRequestId;
+    public String getStrRequestTypeUrl() {
+        return strRequestTypeUrl;
     }
-    public void setStrRequestId(String strRequestId) {
-        this.strRequestId = strRequestId;
+
+    public void setStrRequestTypeUrl(String strRequestTypeUrl) {
+        this.strRequestTypeUrl = strRequestTypeUrl;
     }
 
     public String getStrRequestTcktCode() {

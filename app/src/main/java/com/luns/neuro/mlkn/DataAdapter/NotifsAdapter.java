@@ -6,12 +6,14 @@ package com.luns.neuro.mlkn.DataAdapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.widget.ImageView;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.luns.neuro.mlkn.R;
 
 import java.util.List;
@@ -31,22 +33,11 @@ public class NotifsAdapter extends RecyclerView.Adapter<NotifsAdapter.MyViewHold
     private List<Notifs> allNotifsList;
 
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvNotifId, tvNotifTitle,tvNotifBody,tvNotifTime,tvNfIconText;
-        public ImageView menuIcon;
-        public View notif_layoutcard;
-
-        public MyViewHolder(View view) {
-            super(view);
-            tvNotifId = (TextView) view.findViewById(R.id.tvNotifId);
-            tvNotifTitle = (TextView) view.findViewById(R.id.tvNotifTitle);
-            tvNotifBody = (TextView) view.findViewById(R.id.tvNotifBody);
-            tvNotifTime = (TextView) view.findViewById(R.id.tvNotifTime);
-            tvNfIconText = (TextView) view.findViewById(R.id.tvNfIcon_text);
-            menuIcon = (ImageView) view.findViewById(R.id.icon_thumbnail);
-            notif_layoutcard=view.findViewById(R.id.notif_layoutcard);
-        }
+    //    List<MyRequests>allMyRequestsList
+    public void setFilter(List<Notifs> data) {
+        this.allNotifsList.clear();
+        this.allNotifsList.addAll(data);
+        notifyDataSetChanged();
     }
     public NotifsAdapter(List<Notifs> allNotifsList) {
         this.mContext = mContext;
@@ -99,6 +90,23 @@ public class NotifsAdapter extends RecyclerView.Adapter<NotifsAdapter.MyViewHold
     @Override
     public int getItemCount() {
         return allNotifsList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvNotifId, tvNotifTitle, tvNotifBody, tvNotifTime, tvNfIconText;
+        public ImageView menuIcon;
+        public View notif_layoutcard;
+
+        public MyViewHolder(View view) {
+            super(view);
+            tvNotifId = view.findViewById(R.id.tvNotifId);
+            tvNotifTitle = view.findViewById(R.id.tvNotifTitle);
+            tvNotifBody = view.findViewById(R.id.tvNotifBody);
+            tvNotifTime = view.findViewById(R.id.tvNotifTime);
+            tvNfIconText = view.findViewById(R.id.tvNfIcon_text);
+            menuIcon = view.findViewById(R.id.icon_thumbnail);
+            notif_layoutcard = view.findViewById(R.id.notif_layoutcard);
+        }
     }
 
 }

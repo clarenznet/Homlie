@@ -3,10 +3,13 @@ package com.luns.neuro.mlkn;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.*;
+import android.preference.PreferenceManager;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,20 +20,33 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.luns.neuro.mlkn.DataAdapter.Notifs;
 import com.luns.neuro.mlkn.DataAdapter.NotifsAdapter;
 import com.luns.neuro.mlkn.library.ConnectionDetector;
+import com.luns.neuro.mlkn.library.SQLiteManagerNotifications;
 import com.luns.neuro.mlkn.library.SharedPrefManager;
 import com.luns.neuro.mlkn.library.User;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Messages extends AppCompatActivity implements View.OnClickListener {
@@ -52,13 +68,18 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
     private ProgressBar progressBar;
     private TextView tvNullPlaceHolder;
 
+    private SQLiteManagerNotifications sqLiteManagerNotifications;
+    private SharedPreferences preferencesNotifications;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messages_activity);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        recyclerView = (RecyclerView) findViewById(R.id.notifications_recycler_view);
+        sqLiteManagerNotifications = new SQLiteManagerNotifications(this);
+        preferencesNotifications = PreferenceManager.getDefaultSharedPreferences(this);
+
+        progressBar = findViewById(R.id.progressBar);
+        recyclerView = findViewById(R.id.notifications_recycler_view);
         notifsAdapter = new NotifsAdapter(notifsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
@@ -87,8 +108,50 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
 
             }
         }));
-        getData();
+        ArrayList cache = sqLiteManagerNotifications.getData();
+        boolean isCacheExpire = false;
+        long cacheTime = preferencesNotifications.getLong("cache", 0);
 
+        if (cacheTime > 0) {
+            long currentTime = new Date().getTime();
+            long difference = currentTime - cacheTime;
+            long seconds = difference / 1000;
+
+            if (seconds > 30) {
+                isCacheExpire = true;
+            }
+        }
+        showData();
+        //if (cache.size() > 0 && !isCacheExpire) {
+        if (cache.size() == 0 || isCacheExpire) {
+//                myrequestsList = cache;
+//                showData();
+//            } else {
+            //Toast.makeText(getApplicationContext(),"geting Data from Server",Toast.LENGTH_LONG).show();
+            getData();
+        }
+
+    }
+
+    private void showData() {
+
+        ArrayList cache = sqLiteManagerNotifications.getData();
+        boolean isCacheExpire = false;
+        long cacheTime = preferencesNotifications.getLong("cache", 0);
+
+        if (cacheTime > 0) {
+            long currentTime = new Date().getTime();
+            long difference = currentTime - cacheTime;
+            long seconds = difference / 1000;
+
+            if (seconds > 30) {
+                isCacheExpire = true;
+            }
+        }
+        notifsList.clear();
+        notifsList = cache;
+        notifsAdapter.setFilter(notifsList);
+        // progressBar.setVisibility(View.GONE);
     }
 
     public interface ClickListener {
@@ -162,6 +225,7 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
                         tvNullPlaceHolder.setText("No notifications yet");
                         tvNullPlaceHolder.setVisibility(View.VISIBLE);
                     }else{
+                        notifsAdapter.notifyDataSetChanged();
                         showJSON(response);
                     }
                 }
@@ -177,18 +241,18 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
                                         Toast.LENGTH_LONG).show();
                             }else if (volleyError instanceof AuthFailureError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ServerError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof NetworkError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ParseError){
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -197,13 +261,14 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
+            stringRequest.setShouldCache(false);
 
             requestQueue.add(stringRequest);
         } else {
             //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
             //      .setAction("Action", null).show();
             Snackbar snackbar = Snackbar
-                    .make(recyclerView, "No internet connection! Check settings and try again.", Snackbar.LENGTH_INDEFINITE)
+                    .make(recyclerView, "No internet connection! Check settings and try again.", Snackbar.LENGTH_LONG)
                     .setAction("RETRY", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -215,7 +280,7 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
             snackbar.setActionTextColor(Color.RED);
 // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
 
@@ -226,6 +291,8 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
 
     private void showJSON(String response){
         try {
+            sqLiteManagerNotifications.deleteOldCache();
+            notifsList.clear();
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
             //JSONObject collegeData = result.getJSONObject(0);
@@ -240,10 +307,13 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
                 strNotifPostId = collegeData.getString(KEY_NOTIFREQUESTID);
                 strNotifColor = collegeData.getString(KEY_NOTIFCOLOR);
                 Notifs ordrs = new Notifs(strNotifId,strNotifTitle,strNotifBody,strNotifTime,strNotifPostId,strNotifColor);
+                sqLiteManagerNotifications.addData(ordrs);
                 notifsList.add(ordrs);
                 notifsAdapter.notifyDataSetChanged();
                 //Toast.makeText(getApplicationContext(),strTitle+","+strPriceRange+","+strOrderId,Toast.LENGTH_LONG).show();
             }
+            preferencesNotifications.edit().putLong("cache", new Date().getTime()).apply();
+            notifsAdapter.setFilter(notifsList);
 
         } catch (JSONException e) {
             e.printStackTrace();
