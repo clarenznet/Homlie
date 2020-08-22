@@ -29,7 +29,7 @@
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:textSize="32sp"
-            app:fontFamily="sans-serif-thin" />
+            app:fontFamily="@font/roboto_bold" />
 
         <ImageView
             android:layout_width="@dimen/img_width_height"
@@ -46,10 +46,10 @@
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:text="request services and service men"
+            android:text="keep your home homlie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/textView2223"
-            app:fontFamily="sans-serif-condensed-light"/>
+            app:fontFamily="@font/roboto_medium" />
 
         <TextView
             android:layout_centerHorizontal="true"
@@ -60,10 +60,12 @@
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:text="service providers database for clean workmanship"
+            android:id="@+id/textView222"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView222"
-            app:fontFamily="sans-serif-condensed-light"/>
+            android:layout_height="wrap_content"
+
+            android:text="have fun and still get your chores impeccably done!"
+            app:fontFamily="@font/roboto_regular" />
 
         <LinearLayout
             android:id="@+id/dinah"
@@ -150,16 +152,16 @@
         >
         <TextView
             android:layout_centerHorizontal="true"
-            android:textSize="18sp"
+            android:text="What is your name and email address?"
             android:padding="4dp"
             android:layout_above="@+id/progressBar1"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-            android:text="What is your email address?"
+            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:fontFamily="sans-serif-condensed-light"/>
+            app:fontFamily="@font/roboto_medium" />
         <ProgressBar
             android:id="@+id/progressBar1"
             android:layout_width="30dp"
@@ -167,19 +169,40 @@
             android:layout_gravity="center|top"
             android:layout_marginBottom="20dp"
             android:visibility="gone"
-            android:layout_above="@+id/tlView"
+            android:layout_above="@+id/tlView2"
             />
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:padding="4dp"
             android:layout_marginTop="40dp"
+            android:id="@+id/tlView2"
+            android:layout_above="@+id/tlView"
+            android:inputType="textEmailAddress">
+
+            <EditText
+                android:id="@+id/edtUserFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Please enter your name"
+                android:maxLength="100"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="4dp"
             android:id="@+id/tlView"
             android:inputType="textEmailAddress"
-            android:layout_above="@+id/tlViewConfirm"
-            >
+            android:layout_above="@+id/tlViewConfirm">
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_marginTop="2dp"
@@ -188,7 +211,9 @@
                 android:id="@+id/edtUserEmail"
                 android:maxLength="30"
                 android:singleLine="true"
-                />
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -198,6 +223,7 @@
             android:id="@+id/tlViewConfirm"
             android:inputType="textEmailAddress"
             android:layout_above="@+id/tvSTerms"
+
             >
             <EditText
                 android:layout_width="match_parent"
@@ -206,7 +232,10 @@
                 android:hint="Confirm your email address"
                 android:id="@+id/edtConfirmUserEmail"
                 android:maxLength="30"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
                 android:singleLine="true"
+                android:textSize="16sp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

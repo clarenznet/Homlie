@@ -7,6 +7,8 @@
         android:orderInCategory="100"
         android:title="profile"
         app:showAsAction="always"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
         android:icon="@drawable/profile"
         />
     <item
@@ -14,19 +16,25 @@
         android:orderInCategory="99"
         android:icon="@drawable/mesanote"
         android:title="messages"
-        app:showAsAction="always"/>
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_feedback"
         android:orderInCategory="100"
         android:title="Feedback"
         app:showAsAction="never"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
         />
     <item
         android:id="@+id/action_share"
         android:orderInCategory="100"
         android:title="Share"
         app:showAsAction="never"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
         />
 
     <item
@@ -34,6 +42,8 @@
         android:orderInCategory="100"
         android:title="Help"
         app:showAsAction="never"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
         />
 
     <item
@@ -41,6 +51,8 @@
         android:orderInCategory="100"
         android:title="Terms and Conditions"
         app:showAsAction="never"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
         />
 
 </menu>

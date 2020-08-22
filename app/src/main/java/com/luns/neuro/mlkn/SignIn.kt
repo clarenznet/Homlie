@@ -14,7 +14,6 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.getSystemService
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -40,6 +39,7 @@ class  SignIn : AppCompatActivity() {
         private const val CHANNEL_DESC = "Android Push Notification Tutorial"
         private val RC_SIGN_IN = 101
         private var firebaseid:String?=null
+        private var strUserFullName: String? = null
         private var strUserEmail:String?=null
         private var strConfirmUserEmail:String?=null
         private var strAddress:String?=null
@@ -86,44 +86,49 @@ class  SignIn : AppCompatActivity() {
             Toast.makeText(this@SignIn, "Copied", Toast.LENGTH_LONG).show()
 
         }
-        val buttonPhoneAuth = findViewById(R.id.buttonPhoneAuth)as Button
-        buttonPhoneAuth.setEnabled(false)
+        val buttonPhoneAuth = findViewById<Button>(R.id.buttonPhoneAuth)
+        buttonPhoneAuth.isEnabled = false
 
-        val buttonPhoneAuthNext = findViewById(R.id.buttonPhoneAuthNext)as Button
-        val lytUserEmail  = findViewById(R.id.lytUserEmail)as View
-        val lytTiesto = findViewById(R.id.lytTiesto)as View
-        val edtUserEmail = findViewById(R.id.edtUserEmail)as EditText
-        val edtConfirmUserEmail = findViewById(R.id.edtConfirmUserEmail)as EditText
-        val tvSTerms  = findViewById(R.id.tvSTerms) as TextView
+        val buttonPhoneAuthNext = findViewById<Button>(R.id.buttonPhoneAuthNext)
+        val lytUserEmail = findViewById<View>(R.id.lytUserEmail)
+        val lytTiesto = findViewById<View>(R.id.lytTiesto)
+        val edtUserEmail = findViewById<EditText>(R.id.edtUserEmail)
+        val edtConfirmUserEmail = findViewById<EditText>(R.id.edtConfirmUserEmail)
+        val tvSTerms = findViewById<TextView>(R.id.tvSTerms)
         tvSTerms.setOnClickListener{
             val intent = Intent(this, TermsAndConditions::class.java)
             startActivity(intent)
         }
-        val chkbUserPolicy=  findViewById(R.id.chkS1)as CheckBox
+        val chkbUserPolicy = findViewById<CheckBox>(R.id.chkS1)
         chkbUserPolicy.setOnClickListener{
-                if (chkbUserPolicy.isChecked()){
-                    buttonPhoneAuth.setEnabled(true);
+            if (chkbUserPolicy.isChecked) {
+                buttonPhoneAuth.isEnabled = true
                 }else{
-                    buttonPhoneAuth.setEnabled(false);
+                buttonPhoneAuth.isEnabled = false
                 }
 
             }
-        lytUserEmail.setVisibility(View.GONE)
+        lytUserEmail.visibility = View.GONE
         // Set button listen
         buttonPhoneAuth.setOnClickListener {
+            strUserFullName = ""
             strUserEmail =""
             strConfirmUserEmail=""
-            strUserEmail = edtUserEmail.getText().toString().trim()
-            strConfirmUserEmail= edtConfirmUserEmail.getText().toString().trim()
-            if (!strUserEmail.equals("") && !strUserEmail.equals(null) && strUserEmail.equals(strConfirmUserEmail))
+            strUserFullName = edtUserFullName.text.toString().trim()
+            strUserEmail = edtUserEmail.text.toString().trim()
+            strConfirmUserEmail = edtConfirmUserEmail.text.toString().trim()
+            if (!strUserFullName.equals("") && !strUserFullName.equals(null) && !strUserEmail.equals(
+                    ""
+                ) && !strUserEmail.equals(null) && strUserEmail.equals(strConfirmUserEmail)
+            )
                 doPhoneLogin()
             else
                 Toast.makeText(baseContext, "Please check your email address!!", Toast.LENGTH_LONG).show()
 
         }
         buttonPhoneAuthNext.setOnClickListener {
-            lytTiesto.setVisibility(View.GONE)
-            lytUserEmail.setVisibility(View.VISIBLE)
+            lytTiesto.visibility = View.GONE
+            lytUserEmail.visibility = View.VISIBLE
         }
 
 
@@ -160,15 +165,18 @@ class  SignIn : AppCompatActivity() {
         }
     }
     fun callMainActivity(user: FirebaseUser?){
-            val user = User(user!!.phoneNumber!!, firebaseid, strUserEmail,strAddress, strLatitude, strLongitude)
-            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user)
+        val user = User(
+            user!!.phoneNumber!!, firebaseid, strUserEmail,
+            strUserFullName, strAddress, strLatitude, strLongitude
+        )
+        SharedPrefManager.getInstance(applicationContext).userLogin(user)
             uploadUserDetails()
     }
     private fun uploadUserDetails() {
         var isInternetPresent: Boolean? = null
         val UPLOAD_URL="https://www.instrov.com/malakane_init/user_upload.php"
         val cd = ConnectionDetector(applicationContext)
-        isInternetPresent = cd.isConnectingToInternet()
+        isInternetPresent = cd.isConnectingToInternet
         if (isInternetPresent) {
             //Showing the progress dialog
             progressBar.visibility = View.VISIBLE
@@ -218,6 +226,7 @@ class  SignIn : AppCompatActivity() {
                 override fun getParams(): Map<String, String> {
 
                     val user = SharedPrefManager.getInstance(applicationContext).user
+                    val strUserFullName = user.user_fullname
                     val strUserPhonenumber = user.phonenumber
                     val strUserFirebaseId = user.firebaseid
                     val strUserEmailAddress = user.user_priviledge
@@ -226,7 +235,7 @@ class  SignIn : AppCompatActivity() {
                     //Creating parameters
                     val params = Hashtable<String, String>()
                     //Adding parameters
-
+                    params["struserfullname"] = strUserFullName
                     params["struserphonenumber"] = strUserPhonenumber
                     params["struseremail"] = strUserEmailAddress
                     params["struserfirebaseid"] = strUserFirebaseId
@@ -261,9 +270,9 @@ class  SignIn : AppCompatActivity() {
         }
     }
     override fun onBackPressed() {
-        if (lytUserEmail.getVisibility() == View.VISIBLE) {
-            lytUserEmail.setVisibility(View.GONE)
-            lytTiesto.setVisibility(View.VISIBLE)
+        if (lytUserEmail.visibility == View.VISIBLE) {
+            lytUserEmail.visibility = View.GONE
+            lytTiesto.visibility = View.VISIBLE
         } else {
             finish()
         }

@@ -45,6 +45,7 @@
 
     <include layout="@layout/content_scrolling" />
 
+    <include layout="@layout/bottom_sheet_mainmenu" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

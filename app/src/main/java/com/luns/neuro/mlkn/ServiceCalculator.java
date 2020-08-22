@@ -169,6 +169,7 @@ public class ServiceCalculator extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setTitle(strSelectedService);
+
         recyclerView = findViewById(R.id.deliveryrecycler_view);
         //allordersList = new ArrayList<>();
         //deliveryOrdersAdapter = new DeliveryOrdersAdapter(this, deliveryOrdersList);
@@ -475,10 +476,12 @@ public class ServiceCalculator extends AppCompatActivity {
                         public void onResponse(String s) {
                             loading.dismiss();
                             Toast.makeText(ServiceCalculator.this, "ticket #" + s + " created successfully ", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), DetailsScreen.class);
-                            intent.putExtra("strTicketCode", s);
-                            startActivity(intent);
-                            finish();
+                            if (s.length() == 7) {
+                                Intent intent = new Intent(getApplicationContext(), DetailsScreen.class);
+                                intent.putExtra("strTicketCode", s);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
                     },
                     new Response.ErrorListener() {
@@ -527,11 +530,14 @@ public class ServiceCalculator extends AppCompatActivity {
                     params.put(KEY_FRLATITUDE, strLatitudeR);
                     params.put(KEY_FRLONGITUDE, strLongitudeR);
                     params.put(KEY_FRSPECIFICADDRESS, strSpecificAddressR);
-                    params.put(KEY_FRTASKDESCRIPTION, strDescriptionR);
+//                    params.put(KEY_FRTASKDESCRIPTION, strDescriptionR);
                     params.put(KEY_FRTASKDATE, strDateR);
                     params.put(KEY_FRTASKTIME, strTimeR);
                     params.put(KEY_FRTASKDETAILS, strTaskDetailsR);
                     params.put(KEY_FRTOTALPRICE, strTotalPriceR);
+
+
+                    Log.e("PARAMS", "pData: " + "" + user.getUser_priviledge() + "|||" + user.getPhonenumber() + "|||" + strFundiTypeR + "|||" + strGeneralLocationR + "|||" + strLatitudeR + "|||" + strLongitudeR + "|||" + strSpecificAddressR + "|||" + strDescriptionR + "|||" + strDateR + "|||" + strTimeR + "|||" + strTaskDetailsR + "|||" + strTotalPriceR);
 
 
                     //returning parameters
@@ -544,6 +550,7 @@ public class ServiceCalculator extends AppCompatActivity {
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
+            stringRequest.setShouldCache(false);
             //requestQueue.add(request);
             //DefaultRetryPolicy  retryPolicy = new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             //requestQueue.setRetryPolicy(retryPolicy);
@@ -681,15 +688,16 @@ public class ServiceCalculator extends AppCompatActivity {
         arrDeliveryOrderDetails.clear();
         arrDeliveryOrderDetails.addAll(sourceHash1);
 
-
+        int inTp = 0;
         for (String strElement : arrDeliveryOrderDetails) {
             String[] separatorArray = strElement.split("@!@");
             String strItemUt = "Item:" + separatorArray[1] + " No: x" + separatorArray[2] + " @Ksh:" + separatorArray[3] + " Category:" + separatorArray[4];
             dataf = dataf + strItemUt + "\n";
+            inTp = inTp + (Integer.valueOf(separatorArray[3]) * Integer.valueOf(separatorArray[2]));
             tvOrderData.setText(tvOrderData.getText() + strItemUt + "\n\n");
         }
 
-        tvTotalPrice.setText("" + intTotlaPrice);
+        tvTotalPrice.setText("" + inTp);
     }
 
     @Override

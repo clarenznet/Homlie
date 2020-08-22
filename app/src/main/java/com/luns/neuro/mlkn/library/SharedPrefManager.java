@@ -7,6 +7,7 @@ package com.luns.neuro.mlkn.library;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import com.luns.neuro.mlkn.SignIn;
 
 
@@ -23,6 +24,7 @@ public class SharedPrefManager {
     private static final String KEY_FIREBASEID = "user_firebase_id";
     private static final String KEY_EMAIL = "user_email";
     private static final String KEY_USERPRIVILEDGE = "user_priviledge";
+    private static final String KEY_USERFULLNAME = "user_fullname";
     private static final String KEY_USERADDRESS = "user_address";
     private static final String KEY_USERLATITUDE = "user_latitude";
     private static final String KEY_USERLONGITUDE = "user_longitude";
@@ -49,6 +51,7 @@ public class SharedPrefManager {
     public void userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_USERFULLNAME, user.getUser_fullname());
         editor.putString(KEY_EMAIL, user.getPhonenumber());
         editor.putString(KEY_FIREBASEID, user.getFirebaseid());
         editor.putString(KEY_USERPRIVILEDGE, user.getUser_priviledge());
@@ -71,6 +74,7 @@ public class SharedPrefManager {
                 sharedPreferences.getString(KEY_EMAIL,null ),
                 sharedPreferences.getString(KEY_FIREBASEID, null),
                 sharedPreferences.getString(KEY_USERPRIVILEDGE, null),
+                sharedPreferences.getString(KEY_USERFULLNAME, null),
                 sharedPreferences.getString(KEY_USERADDRESS, null),
                 sharedPreferences.getString(KEY_USERLATITUDE, null),
                 sharedPreferences.getString(KEY_USERLONGITUDE, null)

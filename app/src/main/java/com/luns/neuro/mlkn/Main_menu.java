@@ -1,7 +1,6 @@
 package com.luns.neuro.mlkn;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,11 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -74,8 +71,9 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
         init_ft_recyclerview = findViewById(R.id.ft_recycler_view);
         ftList = new ArrayList<>();
         ftAdapter = new FundiTypesAdapter(this, ftList,this);
-        RecyclerView.LayoutManager ftLayoutManager = new LinearLayoutManager(this);
-        init_ft_recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        RecyclerView.LayoutManager ftLayoutManager = new GridLayoutManager(this, 2);
+        //init_ft_recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        //init_ft_recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
         init_ft_recyclerview.setLayoutManager(ftLayoutManager);
         init_ft_recyclerview.setNestedScrollingEnabled(false);
         init_ft_recyclerview.setItemAnimator(new DefaultItemAnimator());
@@ -315,7 +313,7 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
             for (String strServiceElement : servicesArray) {
 
                 String[] separatorArrayA = strServiceElement.split("@@");
-                FundiTypes fts = new FundiTypes(""+v, separatorArrayA[0], separatorArrayA[1], separatorArrayA[2]);
+                FundiTypes fts = new FundiTypes("" + v, separatorArrayA[0], separatorArrayA[1], separatorArrayA[2], "");
                 //              sqLiteManagerMainMenu.addData(fts);
                 ftList.add(fts);
                 ftAdapter.notifyDataSetChanged();
@@ -337,54 +335,6 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
         //Toast.makeText(getApplicationContext(), "Selected: " + contact.getName() + ", " + contact.getPhone(), Toast.LENGTH_LONG).show();
     }
     ////////////////////
-
-    private void confirmAddressSelection(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Select new location address?");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // TODO Auto-generated method stub
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.getWindow().setBackgroundDrawableResource(R.color.colorPrimaryDark);
-        alert.show();
-    }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_mainmenuactivity, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-////        if (id == R.id.action_myaddress) {
-////
-////            confirmAddressSelection();
-////            //Intent intent = new Intent(Main_menu.this, MapsActivity.class);
-////            //startActivity(intent);
-////            return true;
-////        }
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();

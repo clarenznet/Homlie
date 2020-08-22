@@ -25,14 +25,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Checkout:"
-                    android:textSize="22dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="22sp"
                     android:textColor="@color/white"
                     android:background="@color/colorPrimaryDark"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="Selected items price information"
-                    android:textSize="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Selected items information"
+                android:textSize="16sp"
                     android:textColor="@color/colorPrimaryDark"
                     android:paddingTop="20dp"/>
             <TextView
@@ -50,6 +52,8 @@
                         android:text="Order Details"
                         android:textColor="@color/black"
                         android:id="@+id/tvOrderData"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textSize="16sp"
                 />
 
             <LinearLayout
@@ -61,6 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total KSh: "
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16sp"
                     android:textColor="@color/colorPrimary"
 
                     />
@@ -70,7 +76,8 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorAccent"
                         android:id="@+id/tvTotalPrice"
-                        android:textSize="16dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textSize="16sp"
                         android:textStyle="bold"
                         />
             </LinearLayout>
@@ -79,7 +86,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:text="Address Information"
-                    android:textSize="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
                     android:textColor="@color/colorPrimaryDark"
                     android:paddingTop="30dp"/>
 
@@ -90,7 +98,9 @@
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:text="geolocation: "
-                      android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
             />
             <RelativeLayout
                     android:layout_marginTop="3dp"
@@ -114,8 +124,9 @@
                         android:padding="10dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/tvTaskLocation"
-                        android:text="Nairobi CBD, Cafe Deli"
-                        android:textColor="@color/black"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
                         android:layout_toRightOf="@+id/btnSelectLocation"
                 >
                 </TextView>
@@ -134,7 +145,8 @@
                         android:layout_height="wrap_content"
                         android:hint="specific address e.g house no, building name:"
                         android:id="@+id/edtSpecificAddress"
-                     />
+                    android:fontFamily="@font/roboto_regular"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -143,6 +155,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tVTaskDescription"
                     android:inputType="text"
+                android:visibility="gone"
             >
                 <EditText
                     android:textColor="@color/black"
@@ -151,16 +164,20 @@
                         android:layout_height="wrap_content"
                         android:hint="to note instructions"
                         android:id="@+id/edtTaskDescription"
-                        android:lines="2"/>
+                    android:fontFamily="@font/roboto_regular"
+                    android:lines="2"
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textSize="14dp"
                     android:text="select date mm/dd/yy: "
-            />
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="16sp"
+
+                />
 
             <EditText
                     android:id="@+id/edtSelectedDate"
@@ -169,14 +186,19 @@
                     android:layout_marginTop="2dp"
                     android:inputType="none"
                 android:textColor="@color/black"
-            />
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+
+                />
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textSize="14dp"
                     android:text="select time 24 hour clock system:"
-            />
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+
+                />
             <EditText
                     android:id="@+id/edtSelectedTime"
                     android:layout_height="wrap_content"
@@ -184,7 +206,10 @@
                     android:layout_marginTop="2dp"
                     android:inputType="none"
                     android:textColor="@color/black"
-            />
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+
+                />
 
             <TextView
                     android:layout_width="match_parent"

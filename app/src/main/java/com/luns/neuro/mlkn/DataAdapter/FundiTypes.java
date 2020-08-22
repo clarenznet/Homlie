@@ -8,14 +8,16 @@ public class FundiTypes {
     private String strFtTitle;
     private String strFtDescription;
     private String strFtUrl;
+    private String strServerResponseResultData;
     public FundiTypes() {
     }
 
-    public FundiTypes(String strFtId, String strFtTitle, String strFtDescription, String strFtUrl) {
+    public FundiTypes(String strFtId, String strFtTitle, String strFtDescription, String strFtUrl, String strServerResponseResultData) {
         this.strFtId = strFtId;
         this.strFtTitle = strFtTitle;
         this.strFtDescription = strFtDescription;
         this.strFtUrl = strFtUrl;
+        this.strServerResponseResultData = strServerResponseResultData;
     }
 
     public String getStrFtId() {
@@ -31,5 +33,14 @@ public class FundiTypes {
 
     public String getStrFtUrl() {return strFtUrl;}
     public void setStrFtUrl(String strFtUrl) {this.strFtUrl = strFtUrl;}
+
+    public String getStrServerResponseResultData() {
+        return strServerResponseResultData;
+    }
+
+    public void setStrServerResponseResultData(String strServerResponseResultData) {
+        this.strServerResponseResultData = strServerResponseResultData;
+    }
+
 
 }

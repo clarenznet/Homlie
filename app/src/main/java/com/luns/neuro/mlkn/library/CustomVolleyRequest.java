@@ -68,7 +68,7 @@ public class CustomVolleyRequest {
                //     request.setRetryPolicy(new DefaultRetryPolicy(6000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     DefaultRetryPolicy retryPolicy = new DefaultRetryPolicy(0, -1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
                     request.setRetryPolicy(retryPolicy);
-                    request.setShouldCache(true);
+                    request.setShouldCache(false);
 
                     return add(request);
 

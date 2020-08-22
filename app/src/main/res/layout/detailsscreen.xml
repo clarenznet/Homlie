@@ -1,493 +1,498 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<LinearLayout android:layout_width="match_parent"
-              android:orientation="vertical"
-              android:layout_height="wrap_content"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_horizontal_margin"
-              android:background="@color/white"
->
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:id="@+id/tvOrderTyp"
+            android:id="@+id/tvOrderTyp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dip"
             android:fontFamily="@font/roboto_bold"
-                android:text="request details:"
-                android:textColor="@color/black"
-                android:layout_marginBottom="3dip"
-            android:textSize="22sp"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/my_order_summary"
-        android:text="ticket summary"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="16sp"
-        android:textColor="@color/colorPrimaryDark"
-        />
-    <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-    >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvOrderSummary"
-                android:text="order summary:"
-            android:padding="3dip"
-            android:layout_margin="2dp"
-            android:paddingTop="0dp"
             android:textColor="@color/black"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="16sp"
-
-            />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvOrderTimeHdr"
-                android:fontFamily="@font/roboto_regular"
-                android:textSize="16sp"
-                android:text="Total KSh: "
-                android:textColor="@color/colorPrimary"
-                android:padding="3dip"
-                android:layout_margin="2dp"
-                />
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvOrderTime"
-            android:padding="3dip"
-                android:textColor="@color/black"
-            android:layout_margin="2dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textSize="16sp"
-
-                android:layout_toEndOf="@+id/tvOrderTimeHdr"
-                /></RelativeLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/locationinfo"
-        android:text="ticket location:"
-        android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="16sp"
-        />
-    <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-    >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvSpecificLocationTitle"
-                    android:text="specific location: "
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorPrimary"
-                    />
-                <TextView
-                    android:layout_toRightOf="@+id/tvSpecificLocationTitle"
-                    android:layout_toEndOf="@+id/tvSpecificLocationTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvSpecificLocation"
-                    android:text="specific location"
-                    android:textColor="@color/black"
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvGenLocationTitle"
-                    android:text="general location: "
-                    android:layout_margin="3dip"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
-                    />
-                <TextView
-                    android:layout_toRightOf="@+id/tvGenLocationTitle"
-                    android:layout_toEndOf="@+id/tvGenLocationTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvGenLocation"
-                    android:text="general location"
-                    android:textColor="@color/black"
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
-                    />
-
-            </RelativeLayout>
+            android:textSize="22sp" />
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvLocationPin"
-                android:text="location pin: "
-            android:textColor="@color/colorPrimary"
-            android:layout_margin="3dip"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="16sp"
-
-            />
-        <fragment
-            android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/work_status"
-        android:text="ticket progress:"
-        android:textColor="@color/colorPrimaryDark"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="16sp"
-        />
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
+            android:id="@+id/my_order_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="ticket summary"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                >
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvStatus"
-                    android:text="status:        "
-                    android:textColor="@color/colorPrimary"
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
-                    />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/lytavi"
-                    android:layout_toEndOf="@+id/tvStatus"
-                    android:layout_marginRight="3dp"
-                    >
-                <com.wang.avi.AVLoadingIndicatorView
-                    android:id="@+id/avi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AVLoadingIndicatorView"
-                    android:visibility="visible"
-                    app:indicatorName="BallPulseIndicator"
-                    app:indicatorColor="@color/colorPrimary"
-                    />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvStatusDet"
-                    android:text=""
-                    android:padding="4dip"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimary"
-                    android:layout_margin="3dip"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="20sp"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvDateTimeTitle"
-                    android:text="start time:  "
-                    android:layout_margin="3dip"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
-
-                    />
-                <TextView
-                    android:layout_toRightOf="@+id/tvDateTimeTitle"
-                    android:layout_toEndOf="@+id/tvDateTimeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvDateTime"
-                    android:text="start time"
-                    android:textColor="@color/black"
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvCreatedAtTitle"
-                    android:text="created at:  "
-                    android:layout_margin="3dip"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
-                    />
-                <TextView
-                    android:layout_toRightOf="@+id/tvCreatedAtTitle"
-                    android:layout_toEndOf="@+id/tvCreatedAtTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvCreatedAt"
-                    android:text="created at"
-                    android:textColor="@color/black"
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvToNoteTitle"
-                    android:text="comments:  "
-                    android:layout_margin="3dip"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textSize="16sp"
-
-                    />
-                <TextView
-                    android:layout_toRightOf="@+id/tvToNoteTitle"
-                    android:layout_toEndOf="@+id/tvToNoteTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvToNote"
-                    android:text="to notes"
-                    android:textColor="@color/black"
-                    android:layout_margin="3dip"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
-                    />
-
-            </RelativeLayout>
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                app:cardCornerRadius="3dp"
-                android:elevation="3dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:id="@+id/vw_agent_card">
-                <LinearLayout
+                    android:id="@+id/tvOrderSummary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="2dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:padding="3dip"
+                    android:paddingTop="0dp"
+                    android:text="order summary:"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <TextView
-                        android:layout_width="150dp"
+                        android:id="@+id/tvOrderTimeHdr"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tvServicePerson"
-                        android:text="assigned agent:"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_margin="2dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="3dip"
+                        android:text="Total KSh: "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvOrderTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:layout_toEndOf="@+id/tvOrderTimeHdr"
+                        android:fontFamily="@font/roboto_bold"
+                        android:padding="3dip"
+                        android:textColor="@color/black"
+
+                        android:textSize="16sp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/locationinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/roboto_regular"
+            android:text="ticket location:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvSpecificLocationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_margin="3dip"
                         android:fontFamily="@font/roboto_regular"
+                        android:text="specific location: "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvSpecificLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:layout_toEndOf="@+id/tvSpecificLocationTitle"
+                        android:layout_toRightOf="@+id/tvSpecificLocationTitle"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="specific location"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvGenLocationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="general location: "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvGenLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:layout_toEndOf="@+id/tvGenLocationTitle"
+                        android:layout_toRightOf="@+id/tvGenLocationTitle"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="general location"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvLocationPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dip"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="location pin: "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <fragment
+                    android:id="@+id/map"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/work_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="ticket progress:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="status:        "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:id="@+id/lytavi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp"
+                        android:layout_toEndOf="@+id/tvStatus"
+                        android:orientation="vertical">
+
+                        <com.wang.avi.AVLoadingIndicatorView
+                            android:id="@+id/avi"
+                            style="@style/AVLoadingIndicatorView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            app:indicatorColor="@color/colorPrimary"
+                            app:indicatorName="BallPulseIndicator" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvStatusDet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="3dip"
+                        android:background="@color/colorPrimary"
+                        android:fontFamily="@font/roboto_medium"
+                        android:padding="4dip"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvDateTimeTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="start time:  "
+                        android:textColor="@color/colorPrimary"
                         android:textSize="16sp"
 
                         />
 
-                <LinearLayout
+                    <TextView
+                        android:id="@+id/tvDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:layout_toEndOf="@+id/tvDateTimeTitle"
+                        android:layout_toRightOf="@+id/tvDateTimeTitle"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="start time"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvCreatedAtTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="created at:  "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvCreatedAt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:layout_toEndOf="@+id/tvCreatedAtTitle"
+                        android:layout_toRightOf="@+id/tvCreatedAtTitle"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="created at"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:visibility="gone">
 
-                    <com.android.volley.toolbox.NetworkImageView
-                        android:layout_width="100dp"
-                        android:padding="2dp"
-                        android:id="@+id/nivProfilePhoto"
-                        android:src="@drawable/washingmum"
-                        android:layout_height="100dp"
-                        android:layout_marginStart="10dp"
-                        android:background="@color/colorPrimaryDark"
-                        android:layout_marginBottom="5dp"
-                        />
                     <TextView
-                        android:layout_width="1dp"
-                        android:id="@+id/divider"
-                        android:background="@color/grey"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="2dp"
+                        android:id="@+id/tvToNoteTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="comments:  "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16sp"
+
                         />
+
+                    <TextView
+                        android:id="@+id/tvToNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dip"
+                        android:layout_toEndOf="@+id/tvToNoteTitle"
+                        android:layout_toRightOf="@+id/tvToNoteTitle"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="to notes"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/vw_agent_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="3dp"
+                    android:visibility="gone"
+                    app:cardCornerRadius="3dp">
 
                     <LinearLayout
-                        android:layout_width="120dp"
-                        android:orientation="vertical"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/lytinfo"
-                        android:layout_marginStart="2dp"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tvAgentName"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tvServicePerson"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/black"
-                            android:fontFamily="@font/roboto_medium"
+                            android:layout_margin="3dip"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="assigned agent:"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="16sp"
+
                             />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:text=""
-                            android:id="@+id/tvAgentId"
-                            android:textColor="@color/colorAccent"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_medium"
-                            android:textSize="16sp" />
+                            android:orientation="horizontal">
+
+                            <com.android.volley.toolbox.NetworkImageView
+                                android:id="@+id/nivProfilePhoto"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@color/colorPrimaryDark"
+                                android:padding="2dp"
+                                android:src="@drawable/washingmum" />
+
+                            <TextView
+                                android:id="@+id/divider"
+                                android:layout_width="1dp"
+                                android:layout_height="0dp"
+                                android:layout_marginEnd="2dp"
+                                android:background="@color/grey" />
+
+                            <LinearLayout
+                                android:id="@+id/lytinfo"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tvAgentName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text=""
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/tvAgentId"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:text=""
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/tvRating"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp"
+                                    android:textColor="@color/colorAccent"
+                                    android:textStyle="bold" />
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/divider2"
+                                android:layout_width="1dp"
+                                android:layout_height="0dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_toEndOf="@+id/lytinfo"
+                                android:layout_toRightOf="@+id/lytinfo"
+                                android:background="@color/grey" />
+
+
+                            <ImageView
+                                android:id="@+id/btnMessage"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_margin="6dp"
+                                android:background="@color/colorPrimaryDark"
+                                android:src="@drawable/sms" />
+
+                            <ImageView
+                                android:id="@+id/btnCall"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_margin="6dp"
+                                android:background="@color/colorPrimaryDark"
+                                android:src="@drawable/callagent" />
+
+
+                        </LinearLayout>
+
                         <TextView
                             android:layout_width="wrap_content"
-                            android:textStyle="bold"
-                            android:id="@+id/tvRating"
-                            android:textColor="@color/colorAccent"
-                            android:layout_height="20dp"/>
-
-
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:background="@color/colorAccent"
+                            android:padding="3dp"
+                            android:text="view"
+                            android:textColor="@color/white"
+                            android:textSize="20dip"
+                            android:visibility="gone" />
                     </LinearLayout>
-                    <TextView
-                        android:layout_width="1dp"
-                        android:id="@+id/divider2"
-                        android:background="@color/grey"
-                        android:layout_toRightOf="@+id/lytinfo"
-                        android:layout_toEndOf="@+id/lytinfo"
-                        android:layout_height="0dp"
-                        android:layout_marginRight="2dp"
-                        />
+                </androidx.cardview.widget.CardView>
 
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                        <ImageView
-                            android:id="@+id/btnMessage"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/sms"
-                            android:background="@color/colorPrimaryDark"
-                            android:layout_margin="6dp"/>
-
-                        <ImageView
-                            android:id="@+id/btnCall"
-                            android:layout_margin="6dp"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@color/colorPrimaryDark"
-                            android:src="@drawable/callagent"
-                            />
-
-
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="view"
-                    android:background="@color/colorAccent"
-                    android:textColor="@color/white"
-                    android:layout_gravity="bottom|right"
-                    android:textSize="20dip"
-                    android:padding="3dp"
-                    android:visibility="gone"
-                    />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <Button
+        <Button
             android:id="@+id/btnAcceptRequest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="@color/colorAccent"
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="@dimen/text_20"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="bottom"
-        android:visibility="gone"
-    />
-    <TextView
-        android:id="@+id/tvTicketCompleted"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/colorAccent"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="bottom"
-        android:visibility="gone"
-        android:fontFamily="@font/roboto_bold"
-        android:textSize="16sp"
-        android:text="Ticket Completed Successfully, find corresponding receipt in your apps messages"
-        />
+            android:visibility="gone" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvTicketCompleted"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Ticket Completed Successfully, find corresponding receipt in your apps messages"
+            android:textAllCaps="true"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </LinearLayout>
 </ScrollView>
