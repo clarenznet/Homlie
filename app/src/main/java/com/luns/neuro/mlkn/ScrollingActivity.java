@@ -7,19 +7,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -43,8 +39,6 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.stetho.Stetho;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.luns.neuro.mlkn.DataAdapter.FundiTypes;
 import com.luns.neuro.mlkn.DataAdapter.FundiTypesAdapter;
@@ -62,22 +56,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class ScrollingActivity extends AppCompatActivity implements FundiTypesAdapter.FundiTypesAdapterListener {
-    public static final String INIT_DATA_URL = "https://www.instrov.com/malakane_init/mlkn_init_data.php";
-    private static final String JSON_ARRAY_FT = "service_type";
-    ////////bottom sheet
-    LinearLayout llBottomSheetMainMenu;
-    BottomSheetBehavior bottomSheetBehavior;
-    ArrayList<String> servicesArray = new ArrayList<String>();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     private String strServerResponseResultData = "";
     private RecyclerView init_ft_recyclerview;
-    private FundiTypesAdapter ftAdapter;
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -153,7 +137,6 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
                 .into(backdrop);
     }
 
-    private SharedPreferences preferencesMainMenu;
 
     private void showJSON(String response) {
         try {
@@ -196,46 +179,46 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
         // textViewResult.setText("Name:\t"+name+"\nAddress:\t" +address+ "\nVice Chancellor:\t"+ vc);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_notifications) {
-            Intent intent = new Intent(ScrollingActivity.this, Messages.class);
-            startActivity(intent);
-            return true;
-        }
-
-        if (id == R.id.action_profile) {
-            Intent intent = new Intent(ScrollingActivity.this, My_Profile.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_help) {
-            Intent in = new Intent(ScrollingActivity.this, Help.class);
-            startActivity(in);
-            return true;
-        }
-        if (id == R.id.action_share) {
-            shareText();
-            return true;
-        }
-        if (id == R.id.action_feedback) {
-            Intent in = new Intent(ScrollingActivity.this, Feedback.class);
-            startActivity(in);
-            return true;
-        }
-        if (id == R.id.action_terms) {
-            Intent in = new Intent(ScrollingActivity.this, TermsAndConditions.class);
-            startActivity(in);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_notifications) {
+//            Intent intent = new Intent(ScrollingActivity.this, Messages.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//
+//        if (id == R.id.action_profile) {
+//            Intent intent = new Intent(ScrollingActivity.this, My_Profile.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//        if (id == R.id.action_help) {
+//            Intent in = new Intent(ScrollingActivity.this, Help.class);
+//            startActivity(in);
+//            return true;
+//        }
+//        if (id == R.id.action_share) {
+//            shareText();
+//            return true;
+//        }
+//        if (id == R.id.action_feedback) {
+//            Intent in = new Intent(ScrollingActivity.this, Feedback.class);
+//            startActivity(in);
+//            return true;
+//        }
+//        if (id == R.id.action_terms) {
+//            Intent in = new Intent(ScrollingActivity.this, TermsAndConditions.class);
+//            startActivity(in);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void shareText() {
         Intent shrIntnt = new Intent(Intent.ACTION_SEND);
@@ -246,12 +229,12 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
         startActivity(Intent.createChooser(shrIntnt, "Share link!"));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    //@Override
+    //public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
-        return true;
-    }
+    // getMenuInflater().inflate(R.menu.menu_scrolling, menu);
+    //  return true;
+    //}
 
     public interface ClickListener {
         void onClick(View view, int position);
@@ -305,7 +288,6 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    private String strFtId = "", strFtTitle = "", strFtDescription = "", strFtUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -322,8 +304,6 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
             // in onCreate
             sqLiteManagerMyRequests = new SQLiteManagerMyRequests(this);
             preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            sqLiteManagerMainMenu = new SQLiteManagerMainMenu(this);
-            preferencesMainMenu = PreferenceManager.getDefaultSharedPreferences(this);
             Toolbar toolbar = findViewById(R.id.toolbar);
             //toolbar.setTitle(R.string.app_name);
             toolbar.setTitleTextColor(getResources().getColor(R.color.blue));
@@ -331,18 +311,6 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
             toolbar.setOverflowIcon(getResources().getDrawable(R.drawable.overflowdots));
             // setSupportActionBar(toolbar);
             setSupportActionBar(toolbar);
-            FloatingActionButton fab = findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-                    } else {
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }
-                }
-            });
             backdrop = findViewById(R.id.backdrop);
             backDropImage();
 
@@ -356,12 +324,6 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
             // background animaton
 
 ////////////////////////main menu bottom sheet
-            llBottomSheetMainMenu = findViewById(R.id.bottom_sheet_mainmenu);
-            bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheetMainMenu);
-            bottomSheetBehavior.setPeekHeight(0);
-            bottomSheetBehavior.setHideable(true);
-
-
             idBcgdAnim = findViewById(R.id.idBcgdAnim);
             tvExpl1 = findViewById(R.id.tvExpl1);
             tvExpl2 = findViewById(R.id.tvExpl2);
@@ -451,70 +413,47 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////////////
-            init_ft_recyclerview = findViewById(R.id.ft_recycler_view);
-            ftList = new ArrayList<>();
-            ftAdapter = new FundiTypesAdapter(this, ftList, this);
-            RecyclerView.LayoutManager ftLayoutManager = new LinearLayoutManager(this);
-            //RecyclerView.LayoutManager ftLayoutManager = new GridLayoutManager(this,4);
-            init_ft_recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-            //init_ft_recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
-            init_ft_recyclerview.setLayoutManager(ftLayoutManager);
-            init_ft_recyclerview.setNestedScrollingEnabled(false);
-            init_ft_recyclerview.setItemAnimator(new DefaultItemAnimator());
-            init_ft_recyclerview.setAdapter(ftAdapter);
-            init_ft_recyclerview.addOnItemTouchListener(new Main_menu.RecyclerTouchListener(getApplicationContext(), init_ft_recyclerview, new Main_menu.ClickListener() {
-                @Override
-                public void onClick(View view, int position) {
-                    cd = new ConnectionDetector(getApplicationContext());
-                    isInternetPresent = cd.isConnectingToInternet();
-                    //if (isInternetPresent) {
-                    FundiTypes ft = ftList.get(position);
-                    strSelectedService = ft.getStrFtTitle();
-                    strServerResponseResultData = ft.getStrServerResponseResultData();
-//                String strCacheData = preferencesMainMenu.getString("strResponseJson",null);
-
-                    //                   Toast.makeText(getApplicationContext(), ""+strCacheData, Toast.LENGTH_SHORT).show();
-                    Intent in = new Intent(getApplicationContext(), ServiceCalculator.class);
-//                    if (strServerResponseResultData)
-                    in.putExtra("strServerResponseResultData", strServerResponseResultData);
-                    in.putExtra("strSelectedService", strSelectedService);
-                    // Bundle bndlAnimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.slideinleft, R.anim.slideinright).toBundle();
-                    startActivity(in);
+//            init_ft_recyclerview = findViewById(R.id.ft_recycler_view);
+//            ftList = new ArrayList<>();
+//            ftAdapter = new FundiTypesAdapter(this, ftList, this);
+//            RecyclerView.LayoutManager ftLayoutManager = new LinearLayoutManager(this);
+//            //RecyclerView.LayoutManager ftLayoutManager = new GridLayoutManager(this,4);
+//            init_ft_recyclerview.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+//            //init_ft_recyclerview.setLayoutManager(new GridLayoutManager(this, 4));
+//            init_ft_recyclerview.setLayoutManager(ftLayoutManager);
+//            init_ft_recyclerview.setNestedScrollingEnabled(false);
+//            init_ft_recyclerview.setItemAnimator(new DefaultItemAnimator());
+//            init_ft_recyclerview.setAdapter(ftAdapter);
+//            init_ft_recyclerview.addOnItemTouchListener(new Main_menu.RecyclerTouchListener(getApplicationContext(), init_ft_recyclerview, new Main_menu.ClickListener() {
+//                @Override
+//                public void onClick(View view, int position) {
+//                    cd = new ConnectionDetector(getApplicationContext());
+//                    isInternetPresent = cd.isConnectingToInternet();
+//                    //if (isInternetPresent) {
+//                    FundiTypes ft = ftList.get(position);
+//                    strSelectedService = ft.getStrFtTitle();
+//                    strServerResponseResultData = ft.getStrServerResponseResultData();
+////                String strCacheData = preferencesMainMenu.getString("strResponseJson",null);
 //
-//                    }else {
-//                        Snackbar.make(init_ft_recyclerview, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
-//                                .setAction("Action", null).show();
-//                    }
-                }
-
-                @Override
-                public void onLongClick(View view, int position) {
-
-                }
-            }));
-
-
-            ArrayList cacheMainMenu = sqLiteManagerMainMenu.getData();
-            boolean isCacheExpireMainMenu = false;
-            long cacheTimeMainMenu = preferencesMainMenu.getLong("cache", 0);
-            if (cacheTimeMainMenu > 0) {
-                long currentTimeMainMenu = new Date().getTime();
-                long differenceMainMenu = currentTimeMainMenu - cacheTimeMainMenu;
-                long secondsMainMenu = differenceMainMenu / 1000;
-
-                if (secondsMainMenu > 30) {
-                    isCacheExpireMainMenu = true;
-                }
-            }
-            showDataMainMenu();
-            //if (cache.size() > 0 && !isCacheExpire) {
-            if (cacheMainMenu.size() == 0 || isCacheExpireMainMenu) {
-//                myrequestsList = cache;
-//                showData();
-//            } else {
-                //Toast.makeText(getApplicationContext(),"geting Data from Server",Toast.LENGTH_LONG).show();
-                getInitData();
-            }
+//                    //                   Toast.makeText(getApplicationContext(), ""+strCacheData, Toast.LENGTH_SHORT).show();
+//                    Intent in = new Intent(getApplicationContext(), ServiceCalculator.class);
+////                    if (strServerResponseResultData)
+//                    in.putExtra("strServerResponseResultData", strServerResponseResultData);
+//                    in.putExtra("strSelectedService", strSelectedService);
+//                    // Bundle bndlAnimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.slideinleft, R.anim.slideinright).toBundle();
+//                    startActivity(in);
+////
+////                    }else {
+////                        Snackbar.make(init_ft_recyclerview, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
+////                                .setAction("Action", null).show();
+////                    }
+//                }
+//
+//                @Override
+//                public void onLongClick(View view, int position) {
+//
+//                }
+//            }));
 
         }
     }
@@ -640,141 +579,12 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
 
     }
 
-    private void showDataMainMenu() {
 
-        ArrayList cacheMainMenu = sqLiteManagerMainMenu.getData();
-        boolean isCacheExpireMainMenu = false;
-        long cacheTimeMainMenu = preferencesMainMenu.getLong("cache", 0);
-
-        if (cacheTimeMainMenu > 0) {
-            long currentTimeMainMenu = new Date().getTime();
-            long differenceMainMenu = currentTimeMainMenu - cacheTimeMainMenu;
-            long secondsMainMenu = differenceMainMenu / 1000;
-
-            if (secondsMainMenu > 30) {
-                isCacheExpireMainMenu = true;
-            }
-        }
-        ftList.clear();
-        ftList = cacheMainMenu;
-        ftAdapter.setFilter(ftList);
-        swpRefresh.setRefreshing(false);
-
-        // progressBar.setVisibility(View.GONE);
-    }
-
-    private void getInitData() {
-        swpRefresh.setRefreshing(true);
-        cd = new ConnectionDetector(getApplicationContext());
-        isInternetPresent = cd.isConnectingToInternet();
-        if (isInternetPresent) {
-            //blnLL=true;
-            //      lazyLoader(blnLL);
-            StringRequest stringRequest = new StringRequest(INIT_DATA_URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    //   blnLL=false;
-//                lazyLoader(blnLL);
-                    ftList.clear();
-                    ftAdapter.notifyDataSetChanged();
-                    showJSONInitData(response);
-                    strServerResponseResultData = response;
-                }
-            },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            if (volleyError instanceof TimeoutError || volleyError instanceof NoConnectionError) {
-                                Toast.makeText(getApplicationContext(), "T2" + getApplicationContext().getString(R.string.error_network_timeout),
-                                        Toast.LENGTH_LONG).show();
-                            } else if (volleyError instanceof AuthFailureError) {
-                                Toast.makeText(getApplicationContext(), "A2" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                            } else if (volleyError instanceof ServerError) {
-                                Toast.makeText(getApplicationContext(), "S2" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                            } else if (volleyError instanceof NetworkError) {
-                                Toast.makeText(getApplicationContext(), "N2" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                            } else if (volleyError instanceof ParseError) {
-                                Toast.makeText(getApplicationContext(), "P2" + volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            int socketTimeout = 30000;//30 seconds - change to what you want
-            RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-            stringRequest.setRetryPolicy(policy);
-            stringRequest.setShouldCache(false);
-            requestQueue.add(stringRequest);
-        } else {
-            //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
-            //      .setAction("Action", null).show();
-            Snackbar snackbar = Snackbar
-                    .make(recyclerView, "No internet connection! Check settings and try again.", Snackbar.LENGTH_LONG)
-                    .setAction("RETRY", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            getInitData();
-                        }
-                    });
-// Changing message text color
-            snackbar.setActionTextColor(Color.RED);
-// Changing action button text color
-            View sbView = snackbar.getView();
-            TextView textView = sbView.findViewById(R.id.snackbar_text);
-            textView.setTextColor(Color.YELLOW);
-            snackbar.show();
-        }
-    }
-
-    public void showJSONInitData(String response) {
-        try {
-            getData();
-            sqLiteManagerMainMenu.deleteOldCache();
-            ftList.clear();
-            JSONObject jsonObject = new JSONObject(response);
-            JSONArray result = jsonObject.getJSONArray(JSON_ARRAY_FT);
-            //   Log.e(TAG, "Array: " + ""+result);
-            ///////////////////////////
-            for (int i = 0; i < result.length(); i++) {
-                JSONObject serverData = result.getJSONObject(i);
-                strFtId = serverData.getString("jbid");
-                strFtTitle = serverData.getString("jbfundititle");
-                strFtDescription = serverData.getString("jbdescription");
-                strFtUrl = serverData.getString("jburl");
-                servicesArray.add(strFtTitle + "@@" + strFtDescription + "@@" + strFtUrl);
-            }
-            ////Cleaning Source Knowledge Elements
-            Set<String> sourceHash = new HashSet<>();
-            sourceHash.addAll(servicesArray);
-            TreeSet myTreeSet = new TreeSet();
-            myTreeSet.addAll(sourceHash);
-            servicesArray.clear();
-            servicesArray.addAll(myTreeSet);
-            int v = 1;
-            for (String strServiceElement : servicesArray) {
-                String[] separatorArrayA = strServiceElement.split("@@");
-                FundiTypes fts = new FundiTypes("" + v, separatorArrayA[0], separatorArrayA[1], separatorArrayA[2], response);
-                sqLiteManagerMainMenu.addData(fts);
-                ftList.add(fts);
-                ftAdapter.notifyDataSetChanged();
-                v++;
-            }
-            preferencesMainMenu.edit().putLong("cache", new Date().getTime()).apply();
-//            SharedPreferences settings = this.getSharedPreferences("PreferencesName", Context.MODE_PRIVATE);
-//            settings.edit().remove("strResponseJson").commit();
-//            preferencesMainMenu.edit().putString("strResponseJson",  strServerResponseResultData).commit();
-
-            ftAdapter.setFilter(ftList);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void onFundiTypeSelected(FundiTypes all) {
         //Toast.makeText(getApplicationContext(), "Selected: " + contact.getName() + ", " + contact.getPhone(), Toast.LENGTH_LONG).show();
     }
-
     ////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override

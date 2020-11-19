@@ -101,11 +101,7 @@ class  SignIn : AppCompatActivity() {
         }
         val chkbUserPolicy = findViewById<CheckBox>(R.id.chkS1)
         chkbUserPolicy.setOnClickListener{
-            if (chkbUserPolicy.isChecked) {
-                buttonPhoneAuth.isEnabled = true
-                }else{
-                buttonPhoneAuth.isEnabled = false
-                }
+            buttonPhoneAuth.isEnabled = chkbUserPolicy.isChecked
 
             }
         lytUserEmail.visibility = View.GONE
@@ -189,7 +185,7 @@ class  SignIn : AppCompatActivity() {
                             Snackbar.make(lytTiesto, "Login Successful.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show()
                             finish()
-                            val intent = Intent(this, ScrollingActivity::class.java)
+                            val intent = Intent(this, LandingPage::class.java)
                             startActivity(intent)
                         } else {
                             Snackbar.make(lytTiesto, "Error!!"+s, Snackbar.LENGTH_LONG)

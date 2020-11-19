@@ -92,7 +92,6 @@ public class FundiTypesAdapter extends RecyclerView.Adapter<FundiTypesAdapter.My
                     .dontTransform();
             mContext = holder.itemView.getContext();
 
-
             Glide.with(mContext)
                     .load(all.getStrFtUrl())
                     .apply(options)
