@@ -472,6 +472,8 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
     public static final String KEY_ATCKTRATINGSCORE = "strFndRatingScore";
     public static final String KEY_ATCKTFNDABOUT = "strFndAbout";
 
+
+    //nhjg
     private void getAgentStatus(){
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
@@ -487,8 +489,8 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                     if (response.equals("Error"))
 //                        timeToCallBack();
 
-                    //starting our task which update textview every 2000 ms
-                          new RefreshTask().execute();
+                        //starting our task which update textview every 2000 ms
+                        new RefreshTask().execute();
 
                     else
                         showJSONAResponse(response);
@@ -501,35 +503,35 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                             //Showing toast
                             if(volleyError instanceof TimeoutError ||volleyError instanceof NoConnectionError){
                                 try {
-                                Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error_network_timeout),
-                                        Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), getApplicationContext().getString(R.string.error_network_timeout),
+                                            Toast.LENGTH_LONG).show();
                                 }catch (NullPointerException dsfsd){
 
                                 }
                             }else if (volleyError instanceof AuthFailureError){
                                 try {
                                     Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                            }catch (NullPointerException dsfsd){
+                                }catch (NullPointerException dsfsd){
 
-                            }
+                                }
                             }else if (volleyError instanceof ServerError){
                                 try {
                                     Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
-                        }catch (NullPointerException dsfsd){
+                                }catch (NullPointerException dsfsd){
 
-                        }
+                                }
                             }else if (volleyError instanceof NetworkError){
                                 try {
                                     Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
-            }catch (NullPointerException dsfsd){
+                                }catch (NullPointerException dsfsd){
 
-            }
+                                }
                             }else if (volleyError instanceof ParseError){
                                 try {
                                     Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
-        }catch (NullPointerException dsfsd){
+                                }catch (NullPointerException dsfsd){
 
-        }
+                                }
                             }
                         }
                     });
