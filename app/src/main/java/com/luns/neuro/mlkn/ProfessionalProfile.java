@@ -11,11 +11,32 @@ import android.provider.MediaStore;
 import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.android.volley.*;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,7 +47,12 @@ import com.luns.neuro.mlkn.library.Utility;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Set;
 
 import static com.luns.neuro.mlkn.library.MyApplication.TAG;
 
@@ -91,7 +117,7 @@ public class ProfessionalProfile extends AppCompatActivity{
         }
         progressBar =  findViewById(R.id.progressBarPP);
         intCurrent=1;
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        dotsLayout = findViewById(R.id.layoutDots);
         addBottomDots(intCurrent);
         llyt1=findViewById(R.id.llyt1);
         llyt1.setVisibility(View.VISIBLE);
@@ -128,7 +154,7 @@ public class ProfessionalProfile extends AppCompatActivity{
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,nationality);
         //Getting the instance of AutoCompleteTextView
-        edtNationality =  (AutoCompleteTextView)findViewById(R.id.edtNationality);
+        edtNationality = findViewById(R.id.edtNationality);
         edtNationality.setThreshold(1);//will start working from first character
         edtNationality.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
         edtNationality.setTextColor(Color.BLACK);
@@ -142,14 +168,14 @@ public class ProfessionalProfile extends AppCompatActivity{
         countiesArrayList.clear();
         countiesArrayList.addAll(source1);
 
-        countyArr = (String[]) countiesArrayList.toArray(new String[countiesArrayList.size()]);
+        countyArr = countiesArrayList.toArray(new String[countiesArrayList.size()]);
         Log.e(TAG, "ZZZZ: " + Arrays.toString(countyArr));
 
         //Creating the instance of ArrayAdapter containing list of language names
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,countyArr);
         //Getting the instance of AutoCompleteTextView
-        edtCounty =  (AutoCompleteTextView)findViewById(R.id.edtCounty);
+        edtCounty = findViewById(R.id.edtCounty);
         edtCounty.setThreshold(1);//will start working from first character
         edtCounty.setAdapter(adapter2);//setting the adapter data into the AutoCompleteTextView
         edtCounty.setTextColor(Color.BLACK);
@@ -165,10 +191,10 @@ public class ProfessionalProfile extends AppCompatActivity{
             if (strControlCounty.equals(strCountyElement))
                 physicalAddressArrayList.add(strPhysicalLocality);
         }
-        physicalAddressArr = (String[]) physicalAddressArrayList.toArray(new String[physicalAddressArrayList.size()]);
+        physicalAddressArr = physicalAddressArrayList.toArray(new String[physicalAddressArrayList.size()]);
         Log.e(TAG, "WWWW: " + Arrays.toString(physicalAddressArr));
 
-        edtPhysicalAddress =  (AutoCompleteTextView)findViewById(R.id.edtPhysicalAddress);
+        edtPhysicalAddress = findViewById(R.id.edtPhysicalAddress);
         edtPhysicalAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -183,7 +209,7 @@ public class ProfessionalProfile extends AppCompatActivity{
                         if (strControlCounty.equals(strCountyElement))
                             physicalAddressArrayList.add(strPhysicalLocality);
                     }
-                    physicalAddressArr = (String[]) physicalAddressArrayList.toArray(new String[physicalAddressArrayList.size()]);
+                    physicalAddressArr = physicalAddressArrayList.toArray(new String[physicalAddressArrayList.size()]);
                     Log.e(TAG, "WWWW: " + Arrays.toString(physicalAddressArr));
 
                 }
@@ -204,7 +230,7 @@ public class ProfessionalProfile extends AppCompatActivity{
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,professionArr);
         //Getting the instance of AutoCompleteTextView
-        edtProfessionalTitle =  (AutoCompleteTextView)findViewById(R.id.edtProfessionalTitle);
+        edtProfessionalTitle = findViewById(R.id.edtProfessionalTitle);
         edtProfessionalTitle.setThreshold(1);//will start working from first character
         edtProfessionalTitle.setAdapter(adapter4);//setting the adapter data into the AutoCompleteTextView
         edtProfessionalTitle.setTextColor(Color.BLACK);
@@ -214,7 +240,7 @@ public class ProfessionalProfile extends AppCompatActivity{
         ArrayAdapter<String> adapter4S = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,professionArr);
         //Getting the instance of AutoCompleteTextView
-        edtSecondProfessionalTitle =  (AutoCompleteTextView)findViewById(R.id.edtSecondProfessionalTitle);
+        edtSecondProfessionalTitle = findViewById(R.id.edtSecondProfessionalTitle);
         edtSecondProfessionalTitle.setThreshold(1);//will start working from first character
         edtSecondProfessionalTitle.setAdapter(adapter4S);//setting the adapter data into the AutoCompleteTextView
         edtSecondProfessionalTitle.setTextColor(Color.BLACK);
@@ -224,7 +250,7 @@ public class ProfessionalProfile extends AppCompatActivity{
         ArrayAdapter<String> adapter4T = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,professionArr);
         //Getting the instance of AutoCompleteTextView
-        edtThirdProfessionalTitle =  (AutoCompleteTextView)findViewById(R.id.edtThirdProfessionalTitle);
+        edtThirdProfessionalTitle = findViewById(R.id.edtThirdProfessionalTitle);
         edtThirdProfessionalTitle.setThreshold(1);//will start working from first character
         edtThirdProfessionalTitle.setAdapter(adapter4T);//setting the adapter data into the AutoCompleteTextView
         edtThirdProfessionalTitle.setTextColor(Color.BLACK);
@@ -234,7 +260,7 @@ public class ProfessionalProfile extends AppCompatActivity{
         ArrayAdapter<String> adapter5 = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,edcertlevelArr);
         //Getting the instance of AutoCompleteTextView
-        edtHighestEducationLevel =  (AutoCompleteTextView)findViewById(R.id.edtHighestEducationLevel);
+        edtHighestEducationLevel = findViewById(R.id.edtHighestEducationLevel);
         edtHighestEducationLevel.setThreshold(1);//will start working from first character
         edtHighestEducationLevel.setAdapter(adapter5);//setting the adapter data into the AutoCompleteTextView
         edtHighestEducationLevel.setTextColor(Color.BLACK);
@@ -256,8 +282,8 @@ public class ProfessionalProfile extends AppCompatActivity{
         edtSpecialization=findViewById(R.id.edtSpecialization);
         edtSpecialization.setText(strSpecializationBndls);
 
-        btnBack = (Button) findViewById(R.id.btn_skip);
-        btnNext = (Button) findViewById(R.id.btn_next);
+        btnBack = findViewById(R.id.btn_skip);
+        btnNext = findViewById(R.id.btn_next);
         btnBack.setText("Back");
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,18 +380,18 @@ public class ProfessionalProfile extends AppCompatActivity{
                                         Toast.LENGTH_LONG).show();
                             }else if (volleyError instanceof AuthFailureError){
                                 //
-                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ServerError){
                                 //
-                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof NetworkError){
                                 //
-                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ParseError){
-                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfessionalProfile.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -429,7 +455,7 @@ public class ProfessionalProfile extends AppCompatActivity{
 
 // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
 

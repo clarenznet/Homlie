@@ -8,7 +8,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
-        if (remoteMessage!!.notification != null) {
+        if (remoteMessage.notification != null) {
             val title = remoteMessage.notification!!.title
             val body = remoteMessage.notification!!.body
 

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,10 +59,10 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feedback);
-        btnSend= (Button) findViewById(R.id.btnFSend);
+        btnSend = findViewById(R.id.btnFSend);
         btnSend.setOnClickListener(this);
-        edtTitle= (EditText) findViewById(R.id.edtFTitle);
-        edtDetails= (EditText) findViewById(R.id.edtFDetails);
+        edtTitle = findViewById(R.id.edtFTitle);
+        edtDetails = findViewById(R.id.edtFDetails);
         llyfeedback=findViewById(R.id.llyfeedback);
     }
     private void uploadFeedBack(){
@@ -104,18 +103,18 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
                                         Toast.LENGTH_LONG).show();
                             }else if (volleyError instanceof AuthFailureError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ServerError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof NetworkError){
                                 //
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }else if (volleyError instanceof ParseError){
-                                Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -167,7 +166,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
 
 // Changing action button text color
             View sbView = snackbar.getView();
-            TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.YELLOW);
             snackbar.show();
 

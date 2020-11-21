@@ -185,7 +185,7 @@ class  SignIn : AppCompatActivity() {
                             Snackbar.make(lytTiesto, "Login Successful.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show()
                             finish()
-                            val intent = Intent(this, LandingPage::class.java)
+                            val intent = Intent(this, ScrollingActivity::class.java)
                             startActivity(intent)
                         } else {
                             Snackbar.make(lytTiesto, "Error!!"+s, Snackbar.LENGTH_LONG)

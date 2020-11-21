@@ -472,7 +472,6 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
     public static final String KEY_ATCKTRATINGSCORE = "strFndRatingScore";
     public static final String KEY_ATCKTFNDABOUT = "strFndAbout";
 
-
     private void getAgentStatus(){
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();
@@ -633,7 +632,6 @@ private void textAgent(String strAgentPhoneNo){
     startActivity(I);
 }
 
-
     class RefreshTask extends AsyncTask {
 
         @Override
@@ -654,13 +652,11 @@ private void textAgent(String strAgentPhoneNo){
                     publishProgress();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-
                 }
                 return null;
             //}
         }
     }
-
     private String UPLOAD_URL ="https://www.instrov.com/malakane_init/mlkn_uppymnt_data.php";
     private String KEY_UPPYMNTTICKETNO="uppymnt_ticketno";
     private String KEY_UPPYMNTINVOICETOTAL="uppymnt_invoicetotal";

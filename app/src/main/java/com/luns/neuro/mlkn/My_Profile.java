@@ -4,33 +4,37 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.android.volley.*;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.luns.neuro.mlkn.library.ConnectionDetector;
-import com.luns.neuro.mlkn.library.CustomVolleyRequest;
 import com.luns.neuro.mlkn.library.SharedPrefManager;
 import com.luns.neuro.mlkn.library.User;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class My_Profile extends AppCompatActivity {
         private TextView tvUsername,tvEmail;
@@ -98,18 +102,18 @@ public class My_Profile extends AppCompatActivity {
                                             Toast.LENGTH_LONG).show();
                                 }else if (volleyError instanceof AuthFailureError){
                                     //
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                                 }else if (volleyError instanceof ServerError){
                                     //
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                                 }else if (volleyError instanceof NetworkError){
                                     //
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                                 }else if (volleyError instanceof ParseError){
-                                    Toast.makeText(getApplicationContext(), volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                                 }
                             }
@@ -214,13 +218,13 @@ public class My_Profile extends AppCompatActivity {
                 strNationality = serverData.getString(KEY_UNATIONALITY);
                 //loadProfileImage(strPrfImageUrl);
                 //Log.e(TAG, "MTest: " + ""+serverData+"|||"+strFullName+"|"+strIdNo);
-                professionArr = (String[]) fndTypesArray.toArray(new String[fndTypesArray.size()]);
+                professionArr = fndTypesArray.toArray(new String[fndTypesArray.size()]);
 
                 //Log.e(TAG, "PPPPPPPTTTT: " + ""+ Arrays.toString(professionArr));
 
-                allLocationsArr = (String[]) allLocationsArray.toArray(new String[allLocationsArray.size()]);
+                allLocationsArr = allLocationsArray.toArray(new String[allLocationsArray.size()]);
                 //Log.e(TAG, "allLocationsArray: " + Arrays.toString(allLocationsArr));
-                edcertlevelArr = (String[]) edCertLevelArray.toArray(new String[edCertLevelArray.size()]);
+                edcertlevelArr = edCertLevelArray.toArray(new String[edCertLevelArray.size()]);
                 //Log.e(TAG, "edcertlevelArr: " + Arrays.toString(edcertlevelArr));
                 //tvSummaryProfession.setText(strProfessionalTitle+"\n"+strSecondProfessionalTitle+"\n"+strThirdProfessionalTitle);
             } catch (JSONException e) {

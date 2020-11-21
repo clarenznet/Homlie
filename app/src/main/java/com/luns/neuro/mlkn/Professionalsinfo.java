@@ -1,13 +1,9 @@
 package com.luns.neuro.mlkn;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Arrays;
-
-import static com.luns.neuro.mlkn.library.MyApplication.TAG;
 
 public class Professionalsinfo extends AppCompatActivity {
     private String strServerResponseResultData="";

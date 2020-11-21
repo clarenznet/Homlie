@@ -1,17 +1,15 @@
 package com.luns.neuro.mlkn;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.luns.neuro.mlkn.library.PrefManager;
-import com.luns.neuro.mlkn.library.SharedPrefManager;
-import com.luns.neuro.mlkn.library.User;
 
 /**
  * Created by Clarence on 8/5/2016.
@@ -36,7 +34,7 @@ public class TermsAndConditions extends AppCompatActivity {
         if(strMessageTitle.equals("New Update")){
         btnUpdate.setVisibility(View.VISIBLE);
         }
-        btnGoToSite = (Button) findViewById(R.id.btngotoPrivacyPolicy);
+        btnGoToSite = findViewById(R.id.btngotoPrivacyPolicy);
         btnGoToSite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +43,7 @@ public class TermsAndConditions extends AppCompatActivity {
                 startActivity(i);            }
         });
 
-        btnUpdate= (Button) findViewById(R.id.btnUpdate);
+        btnUpdate = findViewById(R.id.btnUpdate);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
