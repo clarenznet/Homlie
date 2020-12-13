@@ -1,2 +1,4 @@
 # Homlie
-home based services app
+home based services android app
+
+php, android and mysql
