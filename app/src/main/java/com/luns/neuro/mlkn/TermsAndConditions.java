@@ -39,7 +39,7 @@ public class TermsAndConditions extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://consprofileprivacypolicy.instrov.com"));
+                        Uri.parse("https://www.homlie.co.ke/termsandconditions"));
                 startActivity(i);            }
         });
 

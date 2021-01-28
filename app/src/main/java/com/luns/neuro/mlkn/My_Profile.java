@@ -78,7 +78,7 @@ public class My_Profile extends AppCompatActivity {
 
         ConnectionDetector cd;
         Boolean isInternetPresent = false;
-        public static final String DATA_URL = "https://www.instrov.com/malakane_init/mlkn_get_profiledata.php?strgetprofiledata=";
+    public static final String DATA_URL = "https://www.homlie.co.ke/malakane_init/mlkn_get_profiledata.php?strgetprofiledata=";
         private void getData() {
             cd = new ConnectionDetector(getApplicationContext());
             isInternetPresent = cd.isConnectingToInternet();

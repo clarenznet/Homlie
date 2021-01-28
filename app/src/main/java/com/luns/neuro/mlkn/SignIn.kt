@@ -12,7 +12,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
@@ -82,12 +85,12 @@ class  SignIn : AppCompatActivity() {
         buttonCopyToken.setOnClickListener {
             val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("token", textViewToken.text)
-            clipboard.primaryClip = clip
+            //clipboard.primaryClip = clip
             Toast.makeText(this@SignIn, "Copied", Toast.LENGTH_LONG).show()
 
         }
         val buttonPhoneAuth = findViewById<Button>(R.id.buttonPhoneAuth)
-        buttonPhoneAuth.isEnabled = false
+        //buttonPhoneAuth.isEnabled = false
 
         val buttonPhoneAuthNext = findViewById<Button>(R.id.buttonPhoneAuthNext)
         val lytUserEmail = findViewById<View>(R.id.lytUserEmail)
@@ -99,11 +102,11 @@ class  SignIn : AppCompatActivity() {
             val intent = Intent(this, TermsAndConditions::class.java)
             startActivity(intent)
         }
-        val chkbUserPolicy = findViewById<CheckBox>(R.id.chkS1)
-        chkbUserPolicy.setOnClickListener{
-            buttonPhoneAuth.isEnabled = chkbUserPolicy.isChecked
+//        val chkbUserPolicy = findViewById<CheckBox>(R.id.chkS1)
+//        chkbUserPolicy.setOnClickListener{
+        //  buttonPhoneAuth.isEnabled = chkbUserPolicy.isChecked
 
-            }
+        //}
         lytUserEmail.visibility = View.GONE
         // Set button listen
         buttonPhoneAuth.setOnClickListener {
@@ -170,7 +173,7 @@ class  SignIn : AppCompatActivity() {
     }
     private fun uploadUserDetails() {
         var isInternetPresent: Boolean? = null
-        val UPLOAD_URL="https://www.instrov.com/malakane_init/user_upload.php"
+        val UPLOAD_URL = "https://www.homlie.co.ke/malakane_init/user_upload.php"
         val cd = ConnectionDetector(applicationContext)
         isInternetPresent = cd.isConnectingToInternet
         if (isInternetPresent) {
@@ -181,7 +184,7 @@ class  SignIn : AppCompatActivity() {
                     Response.Listener { s ->
                         //Disimissing the progress dialog
                         progressBar.visibility = View.INVISIBLE
-                        if (s.equals("Success") ) {
+                        if (s.trim().equals("Success")) {
                             Snackbar.make(lytTiesto, "Login Successful.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show()
                             finish()

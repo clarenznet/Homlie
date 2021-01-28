@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -101,12 +100,10 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
     BottomSheetBehavior bottomSheetBehavior;
     private EditText edtPayingPhoneNumnber;
     private TextView tvInvoiceTotal,tvPymntTicketNo;
-    private ImageButton btnEditMyPhoneNumber;
+    private Button btnEditMyPhoneNumber;
     private RatingBar ratingbar;
     private Button btnSendPayment;
     private String strUpldPymntTicketNo="",strUpldPymntInvoiceTotal="",strUpldPymntPhoneNumber="",strUpldPymntRating="";
-
-
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -242,14 +239,12 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
         AlertDialog alert = builder.create();
         //alert.getWindow().setBackgroundDrawableResource(R.color.btn_bg);
         alert.show();
-
     }
     private void confirmTransactionDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Confirm transaction...");
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 strUpldPymntTicketNo=tvPymntTicketNo.getText().toString();
@@ -290,7 +285,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
 
         // Add a marker in Sydney, Australia, and move the camera.
         LatLng sydney = new LatLng(fLat,fLong);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Ticket Location"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(strTcktGenLoc));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -308,7 +303,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
         alert.show();
     }
 
-    public static final String DATA_URL = "https://www.instrov.com/malakane_init/mlkn_ticketdetails.php?strpostid=";
+    public static final String DATA_URL = "https://www.homlie.co.ke/malakane_init/mlkn_ticketdetails.php?strpostid=";
     public static final String JSON_ARRAY = "result";
     public static final String KEY_TCKTID= "strTcktId";
     public static final String KEY_TCKTUSREMAIL= "strTcktUsrEmail";
@@ -384,7 +379,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
-
+            stringRequest.setShouldCache(false);
             requestQueue.add(stringRequest);
         } else {
             //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
@@ -459,7 +454,8 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
         }
         // textViewResult.setText("Name:\t"+name+"\nAddress:\t" +address+ "\nVice Chancellor:\t"+ vc);
     }
-    public static final String AGENTSTATUS_URL= "https://www.instrov.com/malakane_init/mlkn_agentstatus.php?strpostid=";
+
+    public static final String AGENTSTATUS_URL = "https://www.homlie.co.ke/malakane_init/mlkn_agentstatus.php?strpostid=";
     public static final String JSON_ARRAY2 = "result";
     public static final String KEY_ATCKTSTATUS = "strTcktStatus";
     public static final String KEY_ATCKTAGENTPHONENO = "strTcktAgntPhoneNo";
@@ -486,7 +482,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
                     //loading.dismiss();
                     //Toast.makeText(getApplicationContext(),""+response,Toast.LENGTH_SHORT).show();
 
-                    if (response.equals("Error"))
+                    if (response.trim().equals("Error"))
 //                        timeToCallBack();
 
                         //starting our task which update textview every 2000 ms
@@ -540,6 +536,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
+            stringRequest.setShouldCache(false);
             requestQueue.add(stringRequest);
         } else {
             //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
@@ -590,7 +587,7 @@ public class DetailsScreen extends AppCompatActivity implements OnMapReadyCallba
             strFndAbout= serverData.getString(KEY_ATCKTFNDABOUT);
             tvStatusDet.setText(strATcktStatus);
             tvAgentName.setText(strFndFullName);
-            tvAgentId.setText("Homlie ID: HA20Y00"+strFndId);
+            tvAgentId.setText("Homlie ID:" + strFndId);
             tvRating.setText("Rating: "+strFndRatingScore);
             loadImage(strFndDp);
             getPaymentStatus();
@@ -659,7 +656,8 @@ private void textAgent(String strAgentPhoneNo){
             //}
         }
     }
-    private String UPLOAD_URL ="https://www.instrov.com/malakane_init/mlkn_uppymnt_data.php";
+
+    private String UPLOAD_URL = "https://www.homlie.co.ke/malakane_init/mlkn_uppymnt_data.php";
     private String KEY_UPPYMNTTICKETNO="uppymnt_ticketno";
     private String KEY_UPPYMNTINVOICETOTAL="uppymnt_invoicetotal";
     private String KEY_UPPYMNTPHONENUMBER="uppymnt_phonenumber";
@@ -680,10 +678,12 @@ private void textAgent(String strAgentPhoneNo){
                             //Toast.makeText(DetailsScreen.this, ""+s +" done", Toast.LENGTH_LONG).show();
                             //String phone_number = mPhone.getText().toString();
                             //String amount = mAmount.getText().toString();
-                            if (s.equals("Success"))
-                            performSTKPush(strUpldPymntPhoneNumber,strUpldPymntInvoiceTotal);
-                            else
-                             Toast.makeText(DetailsScreen.this, "Error!! please try again", Toast.LENGTH_LONG).show();
+                            if (s.trim().equals("Success")) {
+                                performSTKPush(strUpldPymntPhoneNumber, strUpldPymntInvoiceTotal);
+                                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                            } else {
+                                Toast.makeText(DetailsScreen.this, "Error!! please try again", Toast.LENGTH_LONG).show();
+                            }
 
                         }
                     },
@@ -748,6 +748,7 @@ private void textAgent(String strAgentPhoneNo){
             //requestQueue.setRetryPolicy(retryPolicy);
             //.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             //Adding request to the queue
+            stringRequest.setShouldCache(false);
             requestQueue.add(stringRequest);
         } else {
             //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)
@@ -856,7 +857,7 @@ private void textAgent(String strAgentPhoneNo){
     ////////////////////polling for payment confirmation if made
 
 
-    public static final String PYMNTSTATUS_URL= "https://www.instrov.com/malakane_init/mlkn_paymentstatus.php?strpostid=";
+    public static final String PYMNTSTATUS_URL = "https://www.homlie.co.ke/malakane_init/mlkn_paymentstatus.php?strpostid=";
     public static final String JSON_ARRAY_PYMNT = "result";
     public static final String KEY_PYMNTSTATUS = "strTcktStatus";
 
@@ -873,7 +874,7 @@ private void textAgent(String strAgentPhoneNo){
                     //loading.dismiss();
                     //Toast.makeText(getApplicationContext(),""+response,Toast.LENGTH_SHORT).show();
 
-                    if (response.equals("Error"))
+                    if (response.trim().equals("Error"))
                         new RefreshTaskPayment().execute();
                     else
                         showJSONAPYMNTResponse(response);
@@ -923,6 +924,7 @@ private void textAgent(String strAgentPhoneNo){
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
+            stringRequest.setShouldCache(false);
             requestQueue.add(stringRequest);
         } else {
             //Snackbar.make(recyclerView, "No Internet connection, check settings and try again.", Snackbar.LENGTH_LONG)

@@ -216,7 +216,7 @@ public class Main_menu extends AppCompatActivity implements FundiTypesAdapter.Fu
 
     }
     ////////////////////////////////////////////////
-    public static final String INIT_DATA_URL = "https://www.instrov.com/malakane_init/mlkn_init_data.php";
+    public static final String INIT_DATA_URL = "https://www.homlie.co.ke/malakane_init/mlkn_init_data.php";
     private void getInitData() {
         cd = new ConnectionDetector(getApplicationContext());
         isInternetPresent = cd.isConnectingToInternet();

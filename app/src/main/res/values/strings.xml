@@ -10,11 +10,17 @@
     <string name="title_activity_maps">Map</string>
 
 
-    <string name="action_userpolicy">\n These terms and conditions outline the rules and regulations for the use of UrbanSenses Website, located at
+    <string name="action_userpolicy">\n
+    These Terms and Conditions (these Terms) constitute a legally binding agreement between you and Homlie Services, registered in Kenya governing your use of the Homlie platform. Homlies mobile applications (the Applications), and content, products, related services, information, and communication are collectively known as the Homlie Platform.
+The use of all personal data you submit to the Homlie Platform or which we collect about you is governed by our privacy policy (Privacy Policy). A copy of our privacy policy is available here. You acknowledge that by using the Homlie Platform you have reviewed the Homlie Platform Privacy Policy.
+Your consent at registration and continued use of the Homlie Platform constitutes your acceptance of and agreement to all of the terms and conditions in these Terms and Conditions, Code of Conduct and the Privacy Policy as well as any future amendments and additions to this Agreement (as hereinafter defined) as we may publish from time to time.
+Once you provide your consent at registration, you may change your mind and withdraw consent at any time by contacting us support@homlie.co.ke but that will not affect the lawfulness of any processing carried out before you withdraw your consent.
+Homlie may amend the terms related to the Homlie Platform and such amendments will be effective upon Homlie’s posting of such updated Terms and Conditions. Your continued access or use of the Homlie Platform after such posting constitutes your consent to be bound by the Terms and Conditions as amended.
+If any future changes to this agreement are unacceptable to you or cause you to no longer be in compliance with this agreement, you must deactivate your account, and immediately stop using, the Homlie platform.
+If you do not agree to be bound by this agreement and abide by its terms, you may not use or access the Homlie platform.
+By acknowledging the terms and conditions and/or using the Homlie platform, you expressly acknowledge that you have read, understand and agree, without limitation or qualification, to be bound by this agreement and accept all of its terms.
+These terms expressly supersede prior agreements or arrangements with you. Homlie may immediately terminate these terms or any services with respect to you, or generally cease offering or deny services or any portion thereof at any time for any reason.
 
-        By accessing this website we assume you accept these terms and conditions. Do not continue to use UrbanSense if you do not agree to take all of the terms and conditions stated on this page.
-
-        The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company’s terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client’s needs in respect of provision of the Company’s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
     </string>
     <string name="error_network_timeout">Network Timeout</string>
 

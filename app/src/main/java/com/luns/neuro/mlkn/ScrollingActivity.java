@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,7 +69,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class ScrollingActivity extends AppCompatActivity implements FundiTypesAdapter.FundiTypesAdapterListener {
-    public static final String INIT_DATA_URL = "https://www.instrov.com/malakane_init/mlkn_init_data.php";
+    public static final String INIT_DATA_URL = "https://www.homlie.co.ke/malakane_init/mlkn_init_data.php";
     private static final String JSON_ARRAY_FT = "service_type";
     ////////bottom sheet
     LinearLayout llBottomSheetMainMenu;
@@ -87,7 +88,7 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
     private List<MyRequests> myrequestsList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MyRequestsAdapter myrequestsAdapter;
-    public static final String DATA_URL = "https://www.instrov.com/malakane_init/mlkn_getmyrequests.php?struserid=";
+    public static final String DATA_URL = "https://www.homlie.co.ke/malakane_init/mlkn_getmyrequests.php?struserid=";
     public static final String KEY_REQUESTID = "fr_id";
     public static final String KEY_REQUESTTCKTCODE = "fr_tcktcode";
     public static final String KEY_REQUESTTITLE = "fr_funditype";
@@ -105,7 +106,7 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
     String strRequestId = "", strRequestTcktCode = "", strRequestTitle = "", strRequestBody = "", strRequestTime = "", strRequestColor = "", strRequestStatus = "", strCtreatedAt = "";
     //Image Loader
     private ImageLoader imageLoader;
-    public static final String BCKDROP_URL = "https://www.instrov.com/malakane_init/appcovers/cover.png";
+    public static final String BCKDROP_URL = "https://www.homlie.co.ke/malakane_init/appcovers/cover.png";
 
     private ImageView idBcgdAnim;
     String strRawDat = "";
@@ -241,7 +242,7 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
         Intent shrIntnt = new Intent(Intent.ACTION_SEND);
         shrIntnt.setType("text/plain");
         shrIntnt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        shrIntnt.putExtra(Intent.EXTRA_SUBJECT, "Hire a professional, get a service or get hired'");
+        shrIntnt.putExtra(Intent.EXTRA_SUBJECT, "Get your house chores done at the comfort of your home.'");
         shrIntnt.putExtra(Intent.EXTRA_TEXT, "Follow the link to download app from playstore https://play.google.com/store/apps/details?id=com.luns.neuro.mlkn");
         startActivity(Intent.createChooser(shrIntnt, "Share link!"));
     }
@@ -306,7 +307,7 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     private String strFtId = "", strFtTitle = "", strFtDescription = "", strFtUrl = "";
-
+    private Button btnSRequestService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -335,6 +336,18 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+                    } else {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                }
+            });
+            btnSRequestService = findViewById(R.id.btnSRequestService);
+            btnSRequestService.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
@@ -379,6 +392,7 @@ public class ScrollingActivity extends AppCompatActivity implements FundiTypesAd
             recyclerView.addOnItemTouchListener(new ScrollingActivity.RecyclerTouchListener(getApplicationContext(), recyclerView, new ScrollingActivity.ClickListener() {
                 @Override
                 public void onClick(View view, int position) {
+
                     cd = new ConnectionDetector(getApplicationContext());
                     isInternetPresent = cd.isConnectingToInternet();
                     if (isInternetPresent) {

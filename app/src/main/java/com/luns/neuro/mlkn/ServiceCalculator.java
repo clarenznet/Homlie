@@ -22,7 +22,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -55,6 +54,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 import com.luns.neuro.mlkn.DataAdapter.DemographicsItems;
@@ -79,7 +84,7 @@ import java.util.TreeSet;
 /**
  * Created by Clarence on 9/4/2016.
  */
-public class ServiceCalculator extends AppCompatActivity {
+public class ServiceCalculator extends AppCompatActivity implements OnMapReadyCallback {
     private ProgressDialog loading;
     private static final String JSON_ARRAY_FT = "service_type";
     String strServiceRegion = "", strMyLocation = "", strMyPhoneNo = "";
@@ -88,7 +93,7 @@ public class ServiceCalculator extends AppCompatActivity {
     StringRequest stringRequest;
     public ImageLoader imageLoader;
     ArrayList<String> demographicsArray = new ArrayList<String>();
-    private ImageButton btnSelectLocation;
+    private Button btnSelectLocation;
     private Button btn_uploadOrder;
     private RecyclerView recyclerView, recycler_demographics;
     ArrayList<String> arrDeliveryOrderDetails = new ArrayList<String>();
@@ -112,10 +117,10 @@ public class ServiceCalculator extends AppCompatActivity {
     private String strFundiTypeR = "", strLatitudeR = "", strLongitudeR = "", strGeneralLocationR = "", strSpecificAddressR = "",
             strDescriptionR = "", strDateR = "", strTimeR = "", strTaskDetailsR = "", strTotalPriceR = "";
     private EditText edtTaskDescription, edtSpecificAddress;
-    private String strUserPhonenumber = "", strUserFirebaseId = "", strUserEmailAddress = "", strUserAddress = "", strUserLatitude = "", strUserLongitude = "";
+    private String strUserPhonenumber = "", strUserFirebaseId = "", strUserEmailAddress = "", strUserAddress = "", strUserLatitude = "0", strUserLongitude = "0";
     //    private SQLiteManagerServiceCalculator sqLiteManagerServiceCalculator;
 //    private SharedPreferences preferencesServiceCalculator;
-    private String UPLOAD_URL = "https://www.instrov.com/malakane_init/mlkn_upload_request.php";
+    private String UPLOAD_URL = "https://www.homlie.co.ke/malakane_init/mlkn_upload_request.php";
     //    private void showData() {
 //
 //        ArrayList cache = sqLiteManagerServiceCalculator.getData();
@@ -154,6 +159,14 @@ public class ServiceCalculator extends AppCompatActivity {
     private String KEY_FRTOTALPRICE = "fr_strtotalprice";
     private String strFtTitle = "", strId = "", strArticle = "", strDemographic = "", strPrice = "", strArticleIconUrl = "";
 
+    ////////map show
+
+    private GoogleMap mMap;
+    private float fLat = 0, fLong = 0;
+
+    //////////////
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,23 +200,23 @@ public class ServiceCalculator extends AppCompatActivity {
         recycler_demographics.setLayoutManager(dLayoutManager);
         recycler_demographics.setItemAnimator(new DefaultItemAnimator());
         recycler_demographics.setAdapter(demographicsItemAdapter);
-        recycler_demographics.addOnItemTouchListener(new ScrollingActivity.RecyclerTouchListener(getApplicationContext(), recycler_demographics, new ScrollingActivity.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                DemographicsItems dG = demographicsList.get(position);
-                view.setSelected(true);
-//                CardViewDataAdapter sm = new CardViewDataAdapter(serviceitemList);
-////                sm.getFilter().filter(dG.getStrDemographic());
-                //Toast.makeText(ServiceCalculator.this, dG.getStrDemographic(), Toast.LENGTH_SHORT).show();
-                checkOut();
-                showJSON(strServerResponseResultData, dG.getStrDemographic());
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
+//        recycler_demographics.addOnItemTouchListener(new ScrollingActivity.RecyclerTouchListener(getApplicationContext(), recycler_demographics, new ScrollingActivity.ClickListener() {
+//            @Override
+//            public void onClick(View view, int position) {
+//                DemographicsItems dG = demographicsList.get(position);
+//                view.setSelected(true);
+////                CardViewDataAdapter sm = new CardViewDataAdapter(serviceitemList);
+//////                sm.getFilter().filter(dG.getStrDemographic());
+//                //Toast.makeText(ServiceCalculator.this, dG.getStrDemographic(), Toast.LENGTH_SHORT).show();
+//                checkOut();
+//                showJSON(strServerResponseResultData, dG.getStrDemographic());
+//            }
+//
+//            @Override
+//            public void onLongClick(View view, int position) {
+//
+//            }
+//        }));
         progressBar = findViewById(R.id.progressBar);
         arrFinalCheckOut = new ArrayList<String>();
         arrDeliveryOrderDetails = new ArrayList<String>();
@@ -311,10 +324,17 @@ public class ServiceCalculator extends AppCompatActivity {
         strUserLatitude = user.getUser_latitude();
         strUserLongitude = user.getUser_longitude();
         //Toast.makeText(this, ""+strUserAddress+"|"+strUserLatitude+"|"+strUserLongitude, Toast.LENGTH_LONG).show();
-        tvTaskLocation.setText(strUserAddress + "Lat: " + strUserLatitude + "  Long: " + strUserLongitude);
-
+        tvTaskLocation.setText("Google map location:  " + strUserAddress);
+        try {
+            fLat = Float.parseFloat(strUserLatitude);
+            fLong = Float.parseFloat(strUserLongitude);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapTotal);
+        mapFragment.getMapAsync(this);
     }
-
     private void confirmAddressSelection() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Select new location address?");
@@ -476,7 +496,7 @@ public class ServiceCalculator extends AppCompatActivity {
                         public void onResponse(String s) {
                             loading.dismiss();
                             Toast.makeText(ServiceCalculator.this, "ticket #" + s + " created successfully ", Toast.LENGTH_LONG).show();
-                            if (s.length() == 7) {
+                            if (s.trim().length() == 7) {
                                 Intent intent = new Intent(getApplicationContext(), DetailsScreen.class);
                                 intent.putExtra("strTicketCode", s);
                                 startActivity(intent);
@@ -602,7 +622,7 @@ public class ServiceCalculator extends AppCompatActivity {
                 strDemographic = serverData.getString("svc_demographic");
                 strPrice = serverData.getString("svc_price");
                 strArticleIconUrl = serverData.getString("svc_articleiconurl");
-                if (strFtTitle.equals(strSelectedService)) {
+                if (strFtTitle.trim().equals(strSelectedService)) {
                     boolean blnLooperCheck = false;
                     for (String strAddedItem : arrDeliveryOrderDetails) {
                         String[] separatorArray = strAddedItem.split("@!@");
@@ -914,11 +934,32 @@ public class ServiceCalculator extends AppCompatActivity {
             return viewHolder2;
         }
 
-
+        int selectedPosition = -1;
         @Override
         public void onBindViewHolder(final ViewHolder viewHolder2, final int position) {
             final int pos = position;
             viewHolder2.btnDemographics.setText(demographicsList.get(position).getStrDemographic());
+            if (selectedPosition == position)
+                viewHolder2.itemView.setBackgroundColor(Color.parseColor("#e38211"));
+            else
+                viewHolder2.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+
+            viewHolder2.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedPosition = position;
+                    notifyDataSetChanged();
+
+                    DemographicsItems dG = demographicsList.get(position);
+//                    view.setSelected(true);
+//                CardViewDataAdapter sm = new CardViewDataAdapter(serviceitemList);
+////                sm.getFilter().filter(dG.getStrDemographic());
+                    //Toast.makeText(ServiceCalculator.this, dG.getStrDemographic(), Toast.LENGTH_SHORT).show();
+                    checkOut();
+                    showJSON(strServerResponseResultData, dG.getStrDemographic());
+
+                }
+            });
 //           viewHolder2.btnDemographics.setOnClickListener(new Button.OnClickListener() {
 //               @Override
 //               public void onClick(View view) {
@@ -961,6 +1002,7 @@ public class ServiceCalculator extends AppCompatActivity {
             if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 tvTaskLocation.setText("");
+                mMap.clear();
                 getSessionInfo();
                 checkOut();
             } else {
@@ -969,6 +1011,29 @@ public class ServiceCalculator extends AppCompatActivity {
             }
             return true;
         }
+        if (id == R.id.action_help_info) {
+            Intent in = new Intent(ServiceCalculator.this, Help.class);
+            startActivity(in);
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+    //////map show
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney, Australia, and move the camera.
+        LatLng sydney = new LatLng(fLat, fLong);
+        mMap.addMarker(new MarkerOptions().position(sydney).title(strUserAddress));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(fLat, fLong), 15));
+
+        // mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(15));
+    }
+
 }

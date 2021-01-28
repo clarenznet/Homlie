@@ -7,7 +7,7 @@ package com.luns.neuro.mlkn.library;
 public class Config {
     //URL to our login.php file
     //public static final String LOGIN_URL = "http://10.0.2.2/sharere/user_login.php";
-    public static final String LOGIN_URL = "http://www.instrov.com/sharere/user_login.php";
+    public static final String LOGIN_URL = "https://www.admin.homlie.co.ke/sharere/user_login.php";
 
     //Keys for email and password as defined in our $_POST['key'] in login.php
     public static final String KEY_PHONENUMBER = "ur_phonenumber";

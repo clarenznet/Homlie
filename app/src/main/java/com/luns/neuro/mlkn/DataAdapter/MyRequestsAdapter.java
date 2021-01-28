@@ -76,7 +76,6 @@ public class MyRequestsAdapter extends RecyclerView.Adapter<MyRequestsAdapter.My
         } catch (NullPointerException df) {
 
         }
-
 //        imageLoader = CustomVolleyRequest.getInstance(mContext).getImageLoader();
 //        imageLoader.get(noty.getStrRequestTypeUrl(), ImageLoader.getImageListener(holder.menuIcon, R.drawable.placer, android.R.drawable.ic_dialog_alert));
 //        holder.menuIcon.setImageUrl(noty.getStrRequestTypeUrl(), imageLoader);

@@ -32,7 +32,7 @@
         android:paddingTop="15dp"
         android:text="Choose a service to create a request: "
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ft_recycler_view"

@@ -109,6 +109,7 @@
         card_view:cardCornerRadius="2dp"
         android:padding="5dp"
         android:background="@color/colorPrimaryDark"
+        android:visibility="gone"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -156,6 +157,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             >
             <ImageView
                 android:layout_alignParentStart="true"

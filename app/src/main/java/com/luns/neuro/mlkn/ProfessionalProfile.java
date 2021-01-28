@@ -332,7 +332,7 @@ public class ProfessionalProfile extends AppCompatActivity{
     }
     ConnectionDetector cd;
     Boolean isInternetPresent = false;
-    private String UPLOAD_URL ="https://www.instrov.com/malakane_init/mlkn_upload_profile.php";
+    private String UPLOAD_URL = "https://www.homlie.co.ke/malakane_init/mlkn_upload_profile.php";
     private String KEY_IMAGE="prfimage";
     private String KEY_USEREMAIL="usrEmail";
     private String KEY_USERPHONENUMBER="usrPhonenumber";

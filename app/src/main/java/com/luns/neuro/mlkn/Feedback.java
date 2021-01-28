@@ -42,7 +42,7 @@ import java.util.Map;
 public class Feedback extends AppCompatActivity implements View.OnClickListener{
     private EditText edtTitle,edtDetails;
     private Button btnSend;
-    private String UPLOAD_URL ="https://www.instrov.com/profile/feedback_upload.php";
+    private String UPLOAD_URL = "https://www.homlie.co.ke/malakane_init/feedback_upload.php";
     //private String UPLOAD_URL ="http://10.0.2.2/smartbuyer/bid_upload.php";
     private String KEY_TITLE = "strtitle";
     private String KEY_USER_EMAILADDRESS = "struseremail";
@@ -75,11 +75,11 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
             StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
                     new Response.Listener<String>() {
                         @Override
-                        public void onResponse(String s) {
+                        public void onResponse(String strResp) {
                             //Disimissing the progress dialog
                             loading.dismiss();
-//                            Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-                            if (s.equals("Success")) {
+                            Toast.makeText(getApplicationContext(), strResp, Toast.LENGTH_LONG).show();
+                            if (strResp.trim().equalsIgnoreCase("Success")) {
                                 Snackbar.make(llyfeedback, "Success, thanks for your feedback.", Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
                                 closeFeedback();
@@ -145,8 +145,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener{
             int socketTimeout = 30000;//30 seconds - change to what you want
             RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             stringRequest.setRetryPolicy(policy);
-
-
+            stringRequest.setShouldCache(false);
             //Adding request to the queue
             requestQueue.add(stringRequest);
         } else {

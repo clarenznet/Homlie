@@ -54,7 +54,7 @@
                     android:paddingTop="0dp"
                     android:text="order summary:"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
 
                     />
 
@@ -71,7 +71,7 @@
                         android:padding="3dip"
                         android:text="Total KSh: "
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tvOrderTime"
@@ -83,7 +83,7 @@
                         android:padding="3dip"
                         android:textColor="@color/black"
 
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
                 </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -132,7 +132,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="specific location"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -160,7 +160,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="general location"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -241,11 +241,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_margin="3dip"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/round_text_view_small"
                         android:fontFamily="@font/roboto_medium"
                         android:padding="4dip"
                         android:text=""
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="20sp" />
 
                 </RelativeLayout>
@@ -276,7 +276,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="start time"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -304,7 +304,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:text="created at"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 
@@ -321,7 +321,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="comments:  "
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
 
                         />
 
@@ -401,22 +401,20 @@
                                     android:fontFamily="@font/roboto_medium"
                                     android:text=""
                                     android:textColor="@color/black"
-                                    android:textSize="16sp" />
+                                    android:textSize="20sp" />
 
                                 <TextView
                                     android:id="@+id/tvAgentId"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="100dp"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/roboto_medium"
                                     android:text=""
-                                    android:textColor="@color/colorAccent"
                                     android:textSize="16sp" />
 
                                 <TextView
                                     android:id="@+id/tvRating"
                                     android:layout_width="wrap_content"
                                     android:layout_height="20dp"
-                                    android:textColor="@color/colorAccent"
                                     android:textStyle="bold" />
 
 
@@ -437,7 +435,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_margin="6dp"
-                                android:background="@color/colorPrimaryDark"
+                                android:background="@drawable/round_text_view_small"
                                 android:src="@drawable/sms" />
 
                             <ImageView
@@ -445,7 +443,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:layout_margin="6dp"
-                                android:background="@color/colorPrimaryDark"
+                                android:background="@drawable/round_text_view_small"
                                 android:src="@drawable/callagent" />
 
 

@@ -40,6 +40,37 @@
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:layout_marginTop="10dp"
-            android:nestedScrollingEnabled="false"
-    />
+        android:nestedScrollingEnabled="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/lightning"
+            android:id="@+id/idBcgdAnimMessages"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
+            android:padding="2dp" />
+
+        <TextView
+            android:id="@+id/tvExpl1Messages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="2dp"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="3dp"
+            android:text="You don't have new messages."
+            android:textAlignment="center"
+            android:textColor="@color/black22"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 </LinearLayout>

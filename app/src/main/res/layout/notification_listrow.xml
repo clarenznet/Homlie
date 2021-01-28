@@ -47,7 +47,6 @@
     <TextView
         android:id="@+id/tvNotifTitle"
         android:textColor="@color/title"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
@@ -55,7 +54,7 @@
         android:fontFamily="@font/roboto_bold"
         android:layout_toRightOf="@+id/icon_front"
         android:textSize="16sp"
-        android:visibility="visible"
+        android:visibility="gone"
         />
     <TextView
         android:id="@+id/tvNotifBody"
@@ -63,11 +62,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvNotifTitle"
         android:paddingTop="2dp"
-        android:textColor="@color/colorPrimary"
-        android:text="Welcome to malakane service"
+        android:textColor="@color/black"
         android:layout_toRightOf="@+id/icon_front"
         android:fontFamily="@font/roboto_medium"
-        android:textSize="16sp"
+        android:textSize="20sp"
         />
 
     <TextView
@@ -75,11 +73,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvNotifBody"
-        android:textColor="@color/black"
+        android:textColor="@color/colorPrimary"
         android:paddingTop="2dp"
         android:fontFamily="@font/roboto_regular"
         android:layout_toRightOf="@+id/icon_front"
-
         android:textSize="14sp"
     />
 

@@ -5,8 +5,8 @@
     <item
         android:id="@+id/action_profile"
         android:orderInCategory="100"
-        android:title="profile"
-        app:showAsAction="always"
+        android:title="Profile"
+        app:showAsAction="never"
         android:fontFamily="@font/roboto_medium"
         android:textSize="16sp"
         android:icon="@drawable/profile"

@@ -7,4 +7,10 @@
         android:title="Checkout"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/action_help_info"
+        android:orderInCategory="100"
+        android:title="Help"
+        android:icon="@android:drawable/ic_menu_help"
+        app:showAsAction="always" />
 </menu>

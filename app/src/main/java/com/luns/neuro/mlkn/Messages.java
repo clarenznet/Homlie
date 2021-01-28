@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,13 +52,15 @@ import java.util.List;
 
 public class Messages extends AppCompatActivity implements View.OnClickListener {
     //public static final String DATA_URL = "http://10.0.2.2/smartbuyer/getmyorders.php?struserid=";
-    public static final String DATA_URL = "https://www.instrov.com/malakane_init/mlknget_notifications.php?struserid=";
+    public static final String DATA_URL = "https://www.homlie.co.ke/malakane_init/mlknget_notifications.php?struserid=";
     public static final String KEY_NOTIFID = "notif_id";
     public static final String KEY_NOTIFTITLE = "notif_title";
     public static final String KEY_NOTIFBODY = "notif_body";
     public static final String KEY_NOTIFREQUESTID = "notif_requestid";
     public static final String KEY_NOTIFCOLOR = "notif_color";
     public static final String KEY_CREATEDAT = "notif_time";
+    public static final String KEY_RESTYPE = "res_type";
+
     public static final String JSON_ARRAY = "result";
     private ProgressDialog loading;
     private List<Notifs> notifsList = new ArrayList<>();
@@ -66,10 +69,14 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
     ConnectionDetector cd;
     Boolean isInternetPresent = false;
     private ProgressBar progressBar;
-    private TextView tvNullPlaceHolder;
+    private TextView tvNullPlaceHolder, tvExpl1Messages;
 
     private SQLiteManagerNotifications sqLiteManagerNotifications;
     private SharedPreferences preferencesNotifications;
+
+    private ImageView idBcgdAnimMessages;
+    private String strRawDat = "";
+
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
@@ -79,6 +86,8 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
         preferencesNotifications = PreferenceManager.getDefaultSharedPreferences(this);
 
         progressBar = findViewById(R.id.progressBar);
+        idBcgdAnimMessages = findViewById(R.id.idBcgdAnimMessages);
+        tvExpl1Messages = findViewById(R.id.tvExpl1Messages);
         recyclerView = findViewById(R.id.notifications_recycler_view);
         notifsAdapter = new NotifsAdapter(notifsList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -151,6 +160,8 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
         notifsList.clear();
         notifsList = cache;
         notifsAdapter.setFilter(notifsList);
+        idBcgdAnimMessages.setVisibility(View.GONE);
+        tvExpl1Messages.setVisibility(View.GONE);
         // progressBar.setVisibility(View.GONE);
     }
 
@@ -219,6 +230,9 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
             StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    idBcgdAnimMessages.setVisibility(View.VISIBLE);
+                    tvExpl1Messages.setVisibility(View.VISIBLE);
+
                     //       swipeRefreshLayout.setRefreshing(false);
                     progressBar.setVisibility(View.GONE);
                     if (response.equals("Empty")) {
@@ -295,6 +309,8 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
             notifsList.clear();
             JSONObject jsonObject = new JSONObject(response);
             JSONArray result = jsonObject.getJSONArray(JSON_ARRAY);
+            strRawDat = jsonObject.getString(KEY_RESTYPE);
+
             //JSONObject collegeData = result.getJSONObject(0);
             // looping through All Products
             for (int i = 0; i < result.length(); i++) {
@@ -314,6 +330,10 @@ public class Messages extends AppCompatActivity implements View.OnClickListener 
             }
             preferencesNotifications.edit().putLong("cache", new Date().getTime()).apply();
             notifsAdapter.setFilter(notifsList);
+            if (strRawDat.equals("success")) {
+                idBcgdAnimMessages.setVisibility(View.GONE);
+                tvExpl1Messages.setVisibility(View.GONE);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -17,13 +17,13 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                    android:layout_width="60dp"
+                android:layout_width="80dp"
                     android:padding="2dp"
                     android:id="@+id/nimv_article_image"
                     android:src="@drawable/placer"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_height="60dp"
+                android:layout_height="80dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                 android:background="@color/colorPrimaryDark"
@@ -60,7 +60,7 @@
                         android:textColor="@color/black"
 
                     android:fontFamily="@font/roboto_medium"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                 />
 
                 <TextView
@@ -111,10 +111,10 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:text="-"
+                            android:background="@drawable/round_text_view_small"
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold"
                             android:textSize="20dp"
-                            android:background="@color/colorPrimaryDark"
                                 android:src="@android:drawable/ic_menu_add"/>
                             <EditText
                                     android:layout_toRightOf="@+id/btnSub"
@@ -133,8 +133,9 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:textColor="@color/colorPrimary"
-                            android:background="@color/colorPrimaryDark"                                android:layout_toRightOf="@+id/edtdeliveryNoOfItem"
-                                android:text="+"
+                            android:layout_toRightOf="@+id/edtdeliveryNoOfItem"
+                            android:background="@drawable/round_text_view_small"
+                            android:text="+"
                             android:textStyle="bold"
                             android:src="@android:drawable/ic_menu_add"/>
                     </RelativeLayout>

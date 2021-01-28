@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Tell us anything and our team will review it to give you the best experience/service."/>
+        android:text="Tell us anything, your thoughts etc and our team will review it to give you the best experience/service." />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="1dip"
@@ -24,26 +23,35 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:hint="Topic: "
             android:id="@+id/edtFTitle"
             android:textColor="@color/black"
             android:inputType="text"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:hint="Details: "
+            android:textSize="20sp"
             android:layout_marginTop="4dp"
             android:inputType="textCapSentences"
             android:id="@+id/edtFDetails"
@@ -61,6 +69,9 @@
         android:textColor="@color/white"
         android:layout_gravity="right"
         android:background="@color/colorPrimary"
+        android:padding="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         />
 
 
